@@ -1,0 +1,21 @@
+# Nixpacks configuration for Railway
+providers = ["node", "python"]
+
+[phases.setup]
+nixPkgs = ["nodejs", "python3", "gcc"]
+
+[phases.install]
+dependsOn = ["setup"]
+cmds = [
+    "npm install",
+    "pip install -r requirements.txt"
+]
+
+[phases.build]
+dependsOn = ["install"]
+cmds = [
+    "npm run build"
+]
+
+[start]
+cmd = "cd backend && gunicorn --bind 0.0.0.0:$PORT src.main:app"
