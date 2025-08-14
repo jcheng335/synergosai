@@ -11,18 +11,38 @@ from src.routes.interview import interview_bp
 from src.routes.settings import settings_bp
 
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
-app.config['SECRET_KEY'] = 'synergos-ai-secret-key-2024'
+
+# Production configuration
+IS_PRODUCTION = os.environ.get('RAILWAY_ENVIRONMENT') is not None
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'synergos-ai-secret-key-2024')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max file size
 
-# Enable CORS for all routes with all methods and headers
-CORS(app, origins="*", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"], allow_headers=["Content-Type", "Authorization"])
+# Configure CORS
+if IS_PRODUCTION:
+    # In production, allow specific origins
+    CORS(app, origins=["*"], methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"], 
+         allow_headers=["Content-Type", "Authorization"], supports_credentials=True)
+else:
+    # In development, allow all origins
+    CORS(app, origins="*", methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"], 
+         allow_headers=["Content-Type", "Authorization"])
 
 app.register_blueprint(user_bp, url_prefix='/api')
 app.register_blueprint(interview_bp, url_prefix='/api')
 app.register_blueprint(settings_bp, url_prefix='/api')
 
-# uncomment if you need to use database
-app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"
+# Database configuration
+if IS_PRODUCTION:
+    # Use PostgreSQL on Railway
+    database_url = os.environ.get('DATABASE_URL')
+    if database_url and database_url.startswith('postgres://'):
+        database_url = database_url.replace('postgres://', 'postgresql://', 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url or f"sqlite:///{os.path.join('/tmp', 'app.db')}"
+else:
+    # Use SQLite for development
+    os.makedirs(os.path.join(os.path.dirname(__file__), 'database'), exist_ok=True)
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 with app.app_context():
@@ -50,4 +70,6 @@ def serve(path):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    port = int(os.environ.get('PORT', 5001))
+    debug = not IS_PRODUCTION
+    app.run(host='0.0.0.0', port=port, debug=debug)

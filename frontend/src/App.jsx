@@ -15,7 +15,7 @@ import InterviewList from './components/InterviewList.jsx'
 import Settings from './components/Settings.jsx'
 import './App.css'
 
-const API_BASE_URL = 'http://localhost:5001/api'
+const API_BASE_URL = import.meta.env.PROD ? '/api' : 'http://localhost:5001/api'
 
 function App() {
   const [currentView, setCurrentView] = useState('dashboard')

@@ -16,7 +16,7 @@ import {
   Clock
 } from 'lucide-react'
 
-const API_BASE_URL = '/api'
+const API_BASE_URL = import.meta.env.PROD ? '/api' : 'http://localhost:5001/api'
 
 const InterviewPreparation = ({ interview, onStartInterview, onRefresh }) => {
   const [questions, setQuestions] = useState([])
