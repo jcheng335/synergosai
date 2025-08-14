@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run lint)",
+      "Bash(python:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(.venvScriptsactivate)",
+      "Bash(pip install:*)",
+      "Bash(venvScriptsactivate.bat)",
+      "Bash(npm run build:*)",
+      "Bash(xcopy:*)",
+      "Bash(cp:*)",
+      "Bash(mkdir:*)",
+      "Bash(curl:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": [],
+    "defaultMode": "acceptEdits"
+  }
+}
