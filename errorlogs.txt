@@ -16,57 +16,63 @@ Activity
 
 synergosai
 
-Deployment crashed
+Deployment created
 
-48 seconds ago
-
-synergosai
-
-Deployment crashed
-
-48 seconds ago
+1 minute ago
 
 synergosai
 
-Deployment crashed
-
-48 seconds ago
-
-synergosai
-
-Deployment crashed
-
-48 seconds ago
-
-synergosai
-
-Deployment crashed
-
-48 seconds ago
-
-synergosai
-
-Deployment crashed
-
-48 seconds ago
-
-synergosai
-
-Deployment crashed
-
-48 seconds ago
-
-synergosai
-
-Deployment successful
+Deployment restarted
 
 3 minutes ago
 
 synergosai
 
-Deployment failed
+Deployment crashed
 
-6 minutes ago
+3 minutes ago
+
+synergosai
+
+Deployment crashed
+
+3 minutes ago
+
+synergosai
+
+Deployment crashed
+
+3 minutes ago
+
+synergosai
+
+Deployment crashed
+
+3 minutes ago
+
+synergosai
+
+Deployment crashed
+
+3 minutes ago
+
+synergosai
+
+Deployment crashed
+
+3 minutes ago
+
+synergosai
+
+Deployment crashed
+
+3 minutes ago
+
+synergosai
+
+Deployment successful
+
+5 minutes ago
 
 synergosai
 
@@ -76,39 +82,39 @@ Deployment failed
 
 synergosai
 
-Deployment crashed
+Deployment failed
 
-10 minutes ago
-
-synergosai
-
-Deployment crashed
-
-10 minutes ago
+11 minutes ago
 
 synergosai
 
 Deployment crashed
 
-10 minutes ago
+13 minutes ago
 
 synergosai
 
 Deployment crashed
 
-10 minutes ago
+13 minutes ago
 
 synergosai
 
 Deployment crashed
 
-10 minutes ago
+13 minutes ago
 
 synergosai
 
-Deployment successful
+Deployment crashed
 
-12 minutes ago
+13 minutes ago
+
+synergosai
+
+Deployment crashed
+
+13 minutes ago
 
 
 Fetch More
@@ -121,6 +127,17 @@ Settings
 Unexposed service
 us-east4-eqdc4a
 1 Replica
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -144,20 +161,11 @@ History
 
 
 
-
-
-
-
-
-
-
-
-
 synergosai
 /
-9f1106a
-Aug 14, 2025, 7:15 AM
-Crashed
+19fbed7
+Aug 14, 2025, 7:19 AM
+Failed
 
 Get Help
 
@@ -170,97 +178,108 @@ Filter logs using "", (), AND, OR, -
 
 
 
-You reached the start of the range → Aug 14, 2025, 7:15 AM
 
-Starting Container
+Load More
 
-Installing Python dependencies...
+deleting '/nix/store/pkc7mb4a4qvyz73srkqh4mwl70w98dsv-curl-8.11.0'
 
-start.sh: line 6: pip: command not found
+deleting '/nix/store/v9c1s50x7magpiqgycxxkn36avzbcg0g-krb5-1.21.3-lib'
 
-Starting application...
+deleting '/nix/store/d29r1bdmlvwmj52apgcdxfl1mm9c5782-update-autotools-gnu-config-scripts-hook'
 
-start.sh: line 11: gunicorn: command not found
+deleting '/nix/store/1m67ipsk39xvhyqrxnzv2m2p48pil8kl-gnu-config-2024-01-01'
 
-Installing Python dependencies...
+deleting '/nix/store/fv7gpnvg922frkh81w5hkdhpz0nw3iiz-mirrors-list'
 
-start.sh: line 6: pip: command not found
+deleting '/nix/store/00g69vw7c9lycy63h45ximy0wmzqx5y6-diffutils-3.10'
 
-Starting application...
+deleting '/nix/store/dz97fw51rm5bl9kz1vg0haj1j1a7r1mr-nghttp2-1.64.0-dev'
 
-start.sh: line 11: gunicorn: command not found
+deleting '/nix/store/8675pnfr4fqnwv4pzjl67hdwls4q13aa-libssh2-1.11.1'
 
-Installing Python dependencies...
+deleting '/nix/store/grixvx878884hy8x3xs0c0s1i00j632k-nghttp2-1.64.0'
 
-start.sh: line 6: pip: command not found
+deleting '/nix/store/fkd1ma3nify8r9wp463yg5rqz9hdcyf1-npm-9.9.4.tgz'
 
-Starting application...
+deleting '/nix/store/a3c47r5z1q2c4rz0kvq8hlilkhx2s718-gawk-5.3.1'
 
-start.sh: line 11: gunicorn: command not found
+deleting '/nix/store/1c0dv2pdlshjz5kmjd4dfp3c96yncr23-libraries'
 
-Installing Python dependencies...
+deleting '/nix/store/agvks3qmzja0yj54szi3vja6vx3cwkkw-curl-8.11.0-man'
 
-start.sh: line 6: pip: command not found
+deleting '/nix/store/na4c03201p0gmhn3bqr089x0xqia157w-source'
 
-Starting application...
+deleting '/nix/store/lwi59jcfwk2lnrakmm1y5vw85hj3n1bi-source'
 
-start.sh: line 11: gunicorn: command not found
+deleting '/nix/store/jqrz1vq5nz4lnv9pqzydj0ir58wbjfy1-findutils-4.10.0'
 
-Installing Python dependencies...
+deleting '/nix/store/abm77lnrkrkb58z6xp1qwjcr1xgkcfwm-gnused-4.9'
 
-start.sh: line 6: pip: command not found
+deleting '/nix/store/srfxqk119fijwnprgsqvn68ys9kiw0bn-patchelf-0.15.0'
 
-Starting application...
+deleting '/nix/store/9l9n7a0v4aibcz0sgd0crs209an9p7dz-openssl-3.3.2'
 
-start.sh: line 11: gunicorn: command not found
+deleting '/nix/store/qcghigzrz56vczwlzg9c02vbs6zr9jkz-nghttp2-1.64.0-lib'
 
-Installing Python dependencies...
+deleting '/nix/store/mglixp03lsp0w986svwdvm7vcy17rdax-bzip2-1.0.8-bin'
 
-start.sh: line 6: pip: command not found
+deleting '/nix/store/2wh1gqyzf5xsvxpdz2k0bxiz583wwq29-keyutils-1.6.3-lib'
 
-Starting application...
+deleting '/nix/store/fp6cjl1zcmm6mawsnrb5yak1wkz2ma8l-gnumake-4.4.1'
 
-start.sh: line 11: gunicorn: command not found
+deleting unused links...
 
-Installing Python dependencies...
+note: currently hard linking saves 16.38 MiB
 
-start.sh: line 6: pip: command not found
+43 store paths deleted, 262.43 MiB freed
 
-Starting application...
+[stage-0  4/11] RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d  ✔ 41 sec
 
-start.sh: line 11: gunicorn: command not found
+[stage-0  5/11] COPY . /app/.
 
-Installing Python dependencies...
+[stage-0  5/11] COPY . /app/.  ✔ 189 ms
 
-start.sh: line 6: pip: command not found
+[stage-0  6/11] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm npm install
 
-Starting application...
+npm warn config production Use `--omit=dev` instead.
 
-start.sh: line 11: gunicorn: command not found
 
-Installing Python dependencies...
+up to date, audited 1 package in 298ms
 
-start.sh: line 6: pip: command not found
 
-Starting application...
+found 0 vulnerabilities
 
-start.sh: line 11: gunicorn: command not found
+[stage-0  6/11] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm npm install  ✔ 497 ms
 
-Installing Python dependencies...
+[stage-0  7/11] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm pip install -r requirements.txt
 
-start.sh: line 6: pip: command not found
+/bin/bash: line 1: pip: command not found
 
-Starting application...
+✕ [stage-0  7/11] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm pip install -r requirements.txt 
+process "/bin/bash -ol pipefail -c pip install -r requirements.txt" did not complete successfully: exit code: 127
+ 
 
-start.sh: line 11: gunicorn: command not found
+Dockerfile:21
 
-Installing Python dependencies...
+-------------------
 
-Starting application...
+19 |     COPY . /app/.
 
-start.sh: line 6: pip: command not found
+20 |     RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm npm install
 
-start.sh: line 11: gunicorn: command not found
+21 | >>> RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm pip install -r requirements.txt
+
+22 |
+
+23 |     # build phase
+
+-------------------
+
+ERROR: failed to build: failed to solve: process "/bin/bash -ol pipefail -c pip install -r requirements.txt" did not complete successfully: exit code: 127
+
+Error: Docker build failed
+
+Load More
 
 
 synergosai | Railway
