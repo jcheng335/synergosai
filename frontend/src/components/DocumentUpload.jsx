@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Upload, FileText, Link, CheckCircle, AlertCircle, Loader2, ArrowRight } from 'lucide-react';
 
+const API_BASE_URL = import.meta.env.PROD ? '/api' : 'http://localhost:5001/api';
+
 const DocumentUpload = ({ interview, onDocumentsUploaded }) => {
   const interviewId = interview?.id;
   const [uploadStatus, setUploadStatus] = useState({});
@@ -81,7 +83,7 @@ const DocumentUpload = ({ interview, onDocumentsUploaded }) => {
       const base64Data = await convertFileToBase64(file);
       
       // Upload using base64 API
-      const response = await fetch(`http://localhost:5001/api/interviews/${interviewId}/documents-base64`, {
+      const response = await fetch(`${API_BASE_URL}/interviews/${interviewId}/documents-base64`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -145,7 +147,7 @@ const DocumentUpload = ({ interview, onDocumentsUploaded }) => {
     }));
 
     try {
-      const response = await fetch(`http://localhost:5001/api/interviews/${interviewId}/job-url-enhanced`, {
+      const response = await fetch(`${API_BASE_URL}/interviews/${interviewId}/job-url-enhanced`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -386,7 +388,7 @@ const DocumentUpload = ({ interview, onDocumentsUploaded }) => {
               
               try {
                 // Trigger analysis
-                const response = await fetch(`http://localhost:5001/api/interviews/${interviewId}/analyze`, {
+                const response = await fetch(`${API_BASE_URL}/interviews/${interviewId}/analyze`, {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',

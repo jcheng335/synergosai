@@ -19,7 +19,9 @@
       "Bash(git push:*)",
       "Bash(rm:*)",
       "Bash(git commit:*)",
-      "Bash(del package.json)"
+      "Bash(del package.json)",
+      "Bash(robocopy:*)",
+      "Bash(powershell:*)"
     ],
     "deny": [],
     "ask": [],
