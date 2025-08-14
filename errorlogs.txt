@@ -1,21 +1,288 @@
-[stage-0 6/10] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm npm i
-"npm i" did not complete successfully: exit code: 127
+focused-insight
+
+
+production
+
+Share
+
+Architecture
+Observability
+Logs
+Settings
+
+
+
+Activity
+
+synergosai
+
+Deployment failed
+
+2 minutes ago
+
+synergosai
+
+Deployment failed
+
+4 minutes ago
+
+synergosai
+
+Deployment crashed
+
+6 minutes ago
+
+synergosai
+
+Deployment crashed
+
+6 minutes ago
+
+synergosai
+
+Deployment crashed
+
+7 minutes ago
+
+synergosai
+
+Deployment crashed
+
+7 minutes ago
+
+synergosai
+
+Deployment crashed
+
+7 minutes ago
+
+synergosai
+
+Deployment successful
+
+8 minutes ago
+
+synergosai
+
+Deployment failed
+
+12 minutes ago
+
+synergosai
+
+Deployment failed
+
+15 minutes ago
+
+synergosai
+
+Deployment failed
+
+7 hours ago
+
+synergosai
+
+Deployment failed
+
+8 hours ago
+
+
+Fetch More
+
+synergosai
+Deployments
+Variables
+Metrics
+Settings
+Unexposed service
+us-east4-eqdc4a
+1 Replica
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+History
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+synergosai
+/
+393bcb9
+Aug 14, 2025, 7:12 AM
+Failed
+
+Get Help
+
+Details
+Build Logs
+Deploy Logs
+
+Filter
+Filter logs using "", (), AND, OR, -
+
+
+
+You reached the start of the range → Aug 14, 2025, 7:12 AM
+
+copying path '/nix/store/pp2zf8bdgyz60ds8vcshk2603gcjgp72-openssl-3.3.2-dev' from 'https://cache.nixos.org';...
+
+copying path '/nix/store/j7p46r8v9gcpbxx89pbqlh61zhd33gzv-binutils-2.43.1' from 'https://cache.nixos.org';...
+copying path '/nix/store/a2byxfv4lc8f2g5xfzw8cz5q8k05wi29-gmp-with-cxx-6.3.0' from 'https://cache.nixos.org';...
+copying path '/nix/store/srfxqk119fijwnprgsqvn68ys9kiw0bn-patchelf-0.15.0' from 'https://cache.nixos.org';...
+
+copying path '/nix/store/wwipgdqb4p2fr46kmw9c5wlk799kbl68-icu4c-74.2' from 'https://cache.nixos.org';...
+
+copying path '/nix/store/4s9rah4cwaxflicsk5cndnknqlk9n4p3-coreutils-9.5' from 'https://cache.nixos.org';...
+
+copying path '/nix/store/00g69vw7c9lycy63h45ximy0wmzqx5y6-diffutils-3.10' from 'https://cache.nixos.org';...
+copying path '/nix/store/jqrz1vq5nz4lnv9pqzydj0ir58wbjfy1-findutils-4.10.0' from 'https://cache.nixos.org';...
+copying path '/nix/store/1i003ijlh9i0mzp6alqby5hg3090pjdx-perl-5.40.0' from 'https://cache.nixos.org';...
+
+copying path '/nix/store/4ig84cyqi6qy4n0sanrbzsw1ixa497jx-stdenv-linux' from 'https://cache.nixos.org';...
+
+building '/nix/store/cjdjkmr6gy2h8l0cra71whgrvy030kx1-libraries.drv'...
+
+building '/nix/store/bs6g8vhkfynvlzidhlqbsvnc9wijbaaz-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7-env.drv'...
+
+copying path '/nix/store/m8w3mf0i4862q22bxad0wspkgdy4jnkk-icu4c-74.2-dev' from 'https://cache.nixos.org';...
+
+copying path '/nix/store/fkyp1bm5gll9adnfcj92snyym524mdrj-nodejs-22.11.0' from 'https://cache.nixos.org';...
+
+copying path '/nix/store/srcmmqi8kxjfygd0hyy42c8hv6cws83b-binutils-wrapper-2.43.1' from 'https://cache.nixos.org';...
+copying path '/nix/store/l89iqc7am6i60y8vk507zwrzxf0wcd3v-gcc-14-20241116' from 'https://cache.nixos.org';...
+
+copying path '/nix/store/9jzrcxf9wi9yp679il6j6zh6cq81p4s9-readline-8.2p13' from 'https://cache.nixos.org';...
+
+copying path '/nix/store/c9m6yd8fg1flz2j5r4bif1ib5j20a0cy-python3-3.12.8' from 'https://cache.nixos.org';...
+
+copying path '/nix/store/xcn9p4xxfbvlkpah7pwchpav4ab9d135-gcc-wrapper-14-20241116' from 'https://cache.nixos.org';...
+
+building '/nix/store/8578y7kd6mg17jgwywmhcfvsy7fjqxh4-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7-env.drv'...
+
+created 145 symlinks in user environment
+
+building '/nix/store/dswzc53f6kn2sjs2vlkz2m7073xvmyiv-user-environment.drv'...
+
+error: Unable to build profile. There is a conflict for the following files:
+
+         /nix/store/bddmv32fzyh435fr7nyd3l9idacll3px-bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env/bin/idle3
+         /nix/store/jng1km939l937ybvrq2bakdsx4hf7k1l-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7-env/bin/idle3
+
+error: builder for '/nix/store/dswzc53f6kn2sjs2vlkz2m7073xvmyiv-user-environment.drv' failed with exit code 1
+
+✕ [stage-0  6/16] RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d 
+process "/bin/bash -ol pipefail -c nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d" did not complete successfully: exit code: 100
+ 
+
+Dockerfile:10
+
+-------------------
+
+8 |     RUN nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d
+
+9 |     COPY .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix
+
+10 | >>> RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d
+
+11 |
+
+12 |
+
+-------------------
+
+ERROR: failed to build: failed to solve: process "/bin/bash -ol pipefail -c nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d" did not complete successfully: exit code: 100
+
+Error: Docker build failed
+
+
+Build failed with 1 error
+[stage-0 6/16] RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d
+"nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d" did not complete successfully: exit code: 100
 
 View in context
+Truncated to 21 lines
 
-npm warn config production Use `--omit=dev` instead.
+copying path '/nix/store/lygl27c44xv73kx1spskcgvzwq7z337c-openssl-3.3.2-bin' from 'https://cache.nixos.org'...
 
-> synergosai@1.0.0 postinstall
-> pip install -r requirements.txt
+copying path '/nix/store/h18s640fnhhj2qdh5vivcfbxvz377srg-xz-5.6.3-bin' from 'https://cache.nixos.org'...
 
-sh: 1: pip: not found
+copying path '/nix/store/pp2zf8bdgyz60ds8vcshk2603gcjgp72-openssl-3.3.2-dev' from 'https://cache.nixos.org'...
 
-npm error code 127
+copying path '/nix/store/j7p46r8v9gcpbxx89pbqlh61zhd33gzv-binutils-2.43.1' from 'https://cache.nixos.org'...
+copying path '/nix/store/a2byxfv4lc8f2g5xfzw8cz5q8k05wi29-gmp-with-cxx-6.3.0' from 'https://cache.nixos.org'...
+copying path '/nix/store/srfxqk119fijwnprgsqvn68ys9kiw0bn-patchelf-0.15.0' from 'https://cache.nixos.org'...
 
-npm error path /app
+copying path '/nix/store/wwipgdqb4p2fr46kmw9c5wlk799kbl68-icu4c-74.2' from 'https://cache.nixos.org'...
 
-npm error command failed
+copying path '/nix/store/4s9rah4cwaxflicsk5cndnknqlk9n4p3-coreutils-9.5' from 'https://cache.nixos.org'...
 
-npm error command sh -c pip install -r requirements.txt
+copying path '/nix/store/00g69vw7c9lycy63h45ximy0wmzqx5y6-diffutils-3.10' from 'https://cache.nixos.org'...
+copying path '/nix/store/jqrz1vq5nz4lnv9pqzydj0ir58wbjfy1-findutils-4.10.0' from 'https://cache.nixos.org'...
+copying path '/nix/store/1i003ijlh9i0mzp6alqby5hg3090pjdx-perl-5.40.0' from 'https://cache.nixos.org'...
 
-npm error A complete log of this run can be found in: /root/.npm/_logs/2025-08-14T11_09_20_822Z-debug-0.log
+copying path '/nix/store/4ig84cyqi6qy4n0sanrbzsw1ixa497jx-stdenv-linux' from 'https://cache.nixos.org'...
+
+building '/nix/store/cjdjkmr6gy2h8l0cra71whgrvy030kx1-libraries.drv'...
+
+building '/nix/store/bs6g8vhkfynvlzidhlqbsvnc9wijbaaz-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7-env.drv'...
+
+copying path '/nix/store/m8w3mf0i4862q22bxad0wspkgdy4jnkk-icu4c-74.2-dev' from 'https://cache.nixos.org'...
+
+copying path '/nix/store/fkyp1bm5gll9adnfcj92snyym524mdrj-nodejs-22.11.0' from 'https://cache.nixos.org'...
+
+copying path '/nix/store/srcmmqi8kxjfygd0hyy42c8hv6cws83b-binutils-wrapper-2.43.1' from 'https://cache.nixos.org'...
+copying path '/nix/store/l89iqc7am6i60y8vk507zwrzxf0wcd3v-gcc-14-20241116' from 'https://cache.nixos.org'...
+
+copying path '/nix/store/9jzrcxf9wi9yp679il6j6zh6cq81p4s9-readline-8.2p13' from 'https://cache.nixos.org'...
+
+copying path '/nix/store/c9m6yd8fg1flz2j5r4bif1ib5j20a0cy-python3-3.12.8' from 'https://cache.nixos.org'...
+
+copying path '/nix/store/xcn9p4xxfbvlkpah7pwchpav4ab9d135-gcc-wrapper-14-20241116' from 'https://cache.nixos.org'...
+
+building '/nix/store/8578y7kd6mg17jgwywmhcfvsy7fjqxh4-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7-env.drv'...
+
+created 145 symlinks in user environment
+
+building '/nix/store/dswzc53f6kn2sjs2vlkz2m7073xvmyiv-user-environment.drv'...
+
+error: Unable to build profile. There is a conflict for the following files:
+
+         /nix/store/bddmv32fzyh435fr7nyd3l9idacll3px-bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env/bin/idle3
+         /nix/store/jng1km939l937ybvrq2bakdsx4hf7k1l-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7-env/bin/idle3
+
+error: builder for '/nix/store/dswzc53f6kn2sjs2vlkz2m7073xvmyiv-user-environment.drv' failed with exit code 1
+
+synergosai | Railway
