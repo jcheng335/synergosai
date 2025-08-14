@@ -224,15 +224,29 @@ def analyze_documents(interview_id):
         # Store analysis results
         documents['resume'].analysis_result = json.dumps(analysis_result)
         
-        # Generate contextual questions based on actual resume and job content
-        try:
-            contextual_questions = contextual_generator.generate_contextual_questions(resume_text, job_listing_text)
-            # Convert contextual questions to the expected format
-            generated_questions = contextual_questions[:7]  # Take top 7 questions
-        except Exception as e:
-            print(f"Contextual generation failed, falling back to simple: {str(e)}")
-            # Fallback to simple generation if contextual fails
-            generated_questions = ai_service.generate_interview_questions(analysis_result, num_questions=5)
+        # Generate questions - prioritize OpenAI if configured
+        generated_questions = []
+        
+        if api_key_configured:
+            # Use OpenAI for more intelligent question generation
+            try:
+                print("Using OpenAI for tailored question generation...")
+                generated_questions = ai_service.generate_interview_questions(analysis_result, num_questions=7)
+                print(f"Generated {len(generated_questions)} tailored questions using OpenAI")
+            except Exception as e:
+                print(f"OpenAI generation failed: {str(e)}")
+        
+        # Fallback to contextual generator if OpenAI fails or is not configured
+        if not generated_questions:
+            try:
+                print("Using contextual pattern matching for question generation...")
+                contextual_questions = contextual_generator.generate_contextual_questions(resume_text, job_listing_text)
+                generated_questions = contextual_questions[:7]
+                print(f"Generated {len(generated_questions)} questions using contextual patterns")
+            except Exception as e:
+                print(f"Contextual generation also failed: {str(e)}")
+                # Last resort - use default questions
+                generated_questions = []
         
         # Save generated questions
         for i, q_data in enumerate(generated_questions):

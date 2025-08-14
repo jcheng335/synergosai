@@ -45,13 +45,19 @@ class ContextualQuestionGenerator:
         info = self.extract_key_info(resume_text, job_text)
         questions = []
         
-        # Question about specific skills match
-        if info['matching_skills']:
+        # Extract more specific details from resume
+        companies = self._extract_companies(resume_text)
+        projects = self._extract_projects(resume_text)
+        metrics = self._extract_metrics(resume_text)
+        
+        # Question about specific skills match with company context
+        if info['matching_skills'] and companies:
             skill = info['matching_skills'][0] if info['matching_skills'] else 'technical skills'
+            company = companies[0] if companies else 'your previous role'
             questions.append({
-                'text': f"I see you have experience with {skill} which is important for this role. Can you describe a specific project where you applied {skill} to solve a complex problem?",
+                'text': f"I noticed you used {skill} at {company}. Can you walk me through a specific challenge you faced using {skill} and how you overcame it, particularly as it relates to the {info.get('job_title', 'position')} we're discussing?",
                 'category': 'technical',
-                'rationale': f'Assesses practical application of {skill} mentioned in both resume and job requirements'
+                'rationale': f'Assesses practical application of {skill} from {company} experience, directly relevant to job requirements'
             })
         
         # Question about skill gaps
@@ -63,14 +69,28 @@ class ContextualQuestionGenerator:
                 'rationale': f'Evaluates learning ability and approach to {skill} required for the role'
             })
         
-        # Question about specific achievement
+        # Question about specific achievement with metrics
         if info['achievements']:
             achievement = info['achievements'][0] if info['achievements'] else 'your most significant achievement'
-            questions.append({
-                'text': f"You mentioned {achievement} in your resume. Can you walk me through the situation, your specific role, the actions you took, and the measurable results?",
-                'category': 'behavioral',
-                'rationale': 'STAR-based question about specific achievement from resume'
-            })
+            # Try to find related metrics
+            related_metric = None
+            for metric in metrics:
+                if any(word in metric.lower() for word in achievement.lower().split()):
+                    related_metric = metric
+                    break
+            
+            if related_metric:
+                questions.append({
+                    'text': f"Your resume mentions '{achievement}' with {related_metric}. Can you break down the specific strategies you employed to achieve these results, and how you measured success?",
+                    'category': 'behavioral',
+                    'rationale': f'Deep dive into quantifiable achievement: {achievement} with metrics'
+                })
+            else:
+                questions.append({
+                    'text': f"You mentioned '{achievement}' in your resume. What was the business impact of this achievement, and how did you measure its success?",
+                    'category': 'behavioral',
+                    'rationale': f'Explores specific achievement from resume with focus on measurable impact'
+                })
         
         # Role-specific situational question
         job_title = info.get('job_title', 'this role')
@@ -102,17 +122,28 @@ class ContextualQuestionGenerator:
             'rationale': f'Evaluates motivation and cultural fit with {company}'
         })
         
-        # Technical deep-dive based on resume
+        # Technical deep-dive with project context
         if resume_text and len(resume_text) > 100:
             # Look for specific technologies or methodologies
             tech_keywords = self._extract_technologies(resume_text)
-            if tech_keywords:
+            if tech_keywords and projects:
                 tech = tech_keywords[0]
-                questions.append({
-                    'text': f"I noticed you have experience with {tech}. Can you explain a challenging problem you solved using {tech} and what alternative approaches you considered?",
-                    'category': 'technical',
-                    'rationale': f'Deep dive into {tech} expertise mentioned in resume'
-                })
+                project = projects[0] if projects else 'a recent project'
+                # Check if this tech is required for the job
+                is_required = tech.lower() in job_text.lower()
+                
+                if is_required:
+                    questions.append({
+                        'text': f"Since {tech} is a key requirement for this role and you used it in {project}, can you describe the architecture decisions you made and any performance optimizations you implemented?",
+                        'category': 'technical',
+                        'rationale': f'Technical deep-dive into {tech} (required skill) with specific project context from resume'
+                    })
+                else:
+                    questions.append({
+                        'text': f"You worked with {tech} on {project}. How would you apply the lessons learned from that experience to the challenges in this {info.get('job_title', 'role')}?",
+                        'category': 'technical',
+                        'rationale': f'Explores transferable skills from {tech} experience to new role requirements'
+                    })
         
         return questions[:7]  # Return top 7 most relevant questions
     
@@ -228,3 +259,53 @@ class ContextualQuestionGenerator:
                 found_tech.append(pattern.replace('\\', ''))
         
         return found_tech
+    
+    def _extract_companies(self, resume_text: str) -> List[str]:
+        """Extract company names from resume."""
+        companies = []
+        # Look for company patterns
+        patterns = [
+            r'at\s+([A-Z][A-Za-z0-9\s&]+(?:Inc|LLC|Corp|Company|Technologies|Software|Systems|Solutions|Services|Group|Labs|Digital|Global|International))',
+            r'([A-Z][A-Za-z0-9\s&]+(?:Inc|LLC|Corp|Company))\s*[-–—]',
+            r'\n([A-Z][A-Za-z0-9\s&]+)\s*\n[A-Za-z\s]+\d{4}',  # Company name above date
+        ]
+        
+        for pattern in patterns:
+            matches = re.findall(pattern, resume_text)
+            companies.extend([m.strip() for m in matches if len(m.strip()) > 2])
+        
+        return list(set(companies))[:3]  # Return unique top 3
+    
+    def _extract_projects(self, resume_text: str) -> List[str]:
+        """Extract project names or descriptions from resume."""
+        projects = []
+        # Look for project indicators
+        patterns = [
+            r'(?:project|Product|Platform|System|Application|Tool|Service)\s*[:-]?\s*([A-Z][A-Za-z0-9\s]+)',
+            r'(?:developed|built|created|designed|implemented)\s+(?:a\s+)?([A-Za-z0-9\s]+(?:system|platform|application|tool|service))',
+            r'(?:Led|Managed)\s+(?:the\s+)?([A-Z][A-Za-z0-9\s]+(?:project|initiative|implementation))',
+        ]
+        
+        for pattern in patterns:
+            matches = re.findall(pattern, resume_text, re.IGNORECASE)
+            projects.extend([m.strip() for m in matches if len(m.strip()) > 5])
+        
+        return list(set(projects))[:3]
+    
+    def _extract_metrics(self, resume_text: str) -> List[str]:
+        """Extract quantifiable metrics from resume."""
+        metrics = []
+        # Look for metrics patterns
+        patterns = [
+            r'\d+%\s+[a-z]+',  # 50% increase
+            r'[a-z]+\s+(?:by|of)\s+\d+%',  # increased by 50%
+            r'\$[\d,]+(?:K|M)?',  # $100K, $1.5M
+            r'\d+(?:K|M)?\s+(?:users|customers|clients|transactions|requests)',  # 10K users
+            r'\d+x\s+[a-z]+',  # 3x improvement
+        ]
+        
+        for pattern in patterns:
+            matches = re.findall(pattern, resume_text, re.IGNORECASE)
+            metrics.extend(matches)
+        
+        return metrics[:5]

@@ -11,7 +11,8 @@ class AIService:
     def analyze_documents(self, resume_text: str, job_listing_text: str, company_questions: str = "") -> Dict[str, Any]:
         """Analyze uploaded documents to extract key information."""
         prompt = f"""
-        As an HR expert, analyze the following documents and provide a comprehensive analysis:
+        As an expert HR interviewer, carefully analyze the following resume and job listing to create a detailed profile.
+        Focus on extracting SPECIFIC details, technologies, companies, projects, and achievements mentioned.
 
         RESUME:
         {resume_text}
@@ -22,27 +23,34 @@ class AIService:
         COMPANY INTERVIEW QUESTIONS (if provided):
         {company_questions}
 
-        Please provide a JSON response with the following structure:
+        Provide a DETAILED JSON response. Be SPECIFIC - extract actual company names, project names, technologies, and achievements from the documents:
         {{
             "candidate_profile": {{
-                "key_skills": ["skill1", "skill2", ...],
-                "experience_years": "X years",
-                "education": "education details",
-                "notable_achievements": ["achievement1", "achievement2", ...],
-                "strengths": ["strength1", "strength2", ...],
-                "potential_concerns": ["concern1", "concern2", ...]
+                "key_skills": ["list actual technologies/skills from resume"],
+                "experience_years": "specific number",
+                "current_role": "actual job title from resume",
+                "companies_worked": ["actual company names from resume"],
+                "education": "specific degree and institution",
+                "notable_achievements": ["specific achievements with metrics from resume"],
+                "projects": ["specific project names/descriptions from resume"],
+                "strengths": ["specific strengths evident from experience"],
+                "potential_concerns": ["specific gaps or concerns based on job requirements"]
             }},
             "job_requirements": {{
-                "required_skills": ["skill1", "skill2", ...],
-                "preferred_qualifications": ["qual1", "qual2", ...],
-                "key_responsibilities": ["resp1", "resp2", ...],
-                "company_culture_indicators": ["indicator1", "indicator2", ...]
+                "job_title": "exact job title from listing",
+                "company_name": "company name if mentioned",
+                "required_skills": ["specific skills from job listing"],
+                "preferred_qualifications": ["specific qualifications from listing"],
+                "key_responsibilities": ["specific responsibilities from listing"],
+                "experience_required": "specific years/level from listing",
+                "industry_context": "industry/domain from listing"
             }},
             "match_analysis": {{
-                "skill_match_percentage": 85,
-                "experience_alignment": "description",
-                "gaps_to_explore": ["gap1", "gap2", ...],
-                "strengths_to_highlight": ["strength1", "strength2", ...]
+                "matching_skills": ["specific skills candidate has that job requires"],
+                "missing_skills": ["specific skills job requires that aren't evident in resume"],
+                "relevant_experience": ["specific experiences from resume relevant to job"],
+                "transferable_skills": ["skills from different context applicable to this role"],
+                "areas_to_probe": ["specific topics to explore in interview based on gaps or questions"]
             }}
         }}
         """
@@ -67,24 +75,56 @@ class AIService:
     
     def generate_interview_questions(self, analysis_result: Dict[str, Any], num_questions: int = 5) -> List[Dict[str, str]]:
         """Generate tailored interview questions based on document analysis."""
+        
+        # Extract specific details from analysis
+        candidate = analysis_result.get('candidate_profile', {})
+        job = analysis_result.get('job_requirements', {})
+        match = analysis_result.get('match_analysis', {})
+        
         prompt = f"""
-        Based on the following candidate and job analysis, generate {num_questions} tailored interview questions.
+        You are an expert interviewer. Generate {num_questions} HIGHLY TAILORED interview questions based on this specific candidate and job.
+        
+        CANDIDATE PROFILE:
+        - Skills: {candidate.get('key_skills', [])}
+        - Current Role: {candidate.get('current_role', 'Not specified')}
+        - Companies: {candidate.get('companies_worked', [])}
+        - Projects: {candidate.get('projects', [])}
+        - Achievements: {candidate.get('notable_achievements', [])}
+        - Experience: {candidate.get('experience_years', 'Not specified')}
+        
+        JOB REQUIREMENTS:
+        - Position: {job.get('job_title', 'Not specified')}
+        - Company: {job.get('company_name', 'Not specified')}
+        - Required Skills: {job.get('required_skills', [])}
+        - Responsibilities: {job.get('key_responsibilities', [])}
+        - Experience Required: {job.get('experience_required', 'Not specified')}
+        
+        MATCH ANALYSIS:
+        - Matching Skills: {match.get('matching_skills', [])}
+        - Missing Skills: {match.get('missing_skills', [])}
+        - Relevant Experience: {match.get('relevant_experience', [])}
+        - Areas to Probe: {match.get('areas_to_probe', [])}
 
-        ANALYSIS:
-        {json.dumps(analysis_result, indent=2)}
+        CRITICAL INSTRUCTIONS:
+        1. Each question MUST reference SPECIFIC details from either the resume or job listing
+        2. Use the candidate's actual company names, projects, or technologies when asking questions
+        3. Reference specific job requirements or responsibilities when relevant
+        4. For skill gaps, ask how they would transfer existing skills or learn new ones
+        5. Include at least one question about specific achievements or projects mentioned
+        6. Questions should feel personalized, not generic
 
-        Generate questions that:
-        1. Explore the candidate's experience relevant to the job requirements
-        2. Address any gaps or concerns identified in the analysis
-        3. Allow the candidate to showcase their strengths
-        4. Follow best practices for behavioral interviewing
+        Example of a GOOD tailored question:
+        "I see you worked with {candidate.get('key_skills', ['Python'])[0] if candidate.get('key_skills') else 'Python'} at {candidate.get('companies_worked', ['your previous company'])[0] if candidate.get('companies_worked') else 'your previous company'}. This role requires {job.get('required_skills', ['similar technology'])[0] if job.get('required_skills') else 'similar technology'}. Can you describe a specific project where you used these skills to solve a complex problem?"
 
-        Provide the response as a JSON array of objects with this structure:
+        Example of a BAD generic question:
+        "Tell me about a time you worked in a team."
+
+        Provide the response as a JSON array:
         [
             {{
-                "text": "Question text here",
+                "text": "[Specific question referencing actual details from resume/job]",
                 "category": "behavioral|technical|situational|cultural",
-                "rationale": "Why this question is important for this candidate"
+                "rationale": "[Explain why this question matters for THIS specific candidate and role]"
             }}
         ]
         """
