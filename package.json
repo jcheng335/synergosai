@@ -1,0 +1,13 @@
+{
+  "name": "synergosai",
+  "version": "1.0.0",
+  "description": "Synergos AI Interview Companion Tool",
+  "scripts": {
+    "build": "cd frontend && npm install --legacy-peer-deps && npm run build && cp -r dist/* ../backend/src/static/",
+    "start": "cd backend && python src/main.py",
+    "start:prod": "cd backend && gunicorn --bind 0.0.0.0:$PORT src.main:app"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

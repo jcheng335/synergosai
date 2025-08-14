@@ -16,19 +16,25 @@ synergosai
 
 Deployment failed
 
-2 minutes ago
+36 seconds ago
 
 synergosai
 
 Deployment failed
 
-16 minutes ago
+7 hours ago
 
 synergosai
 
 Deployment failed
 
-25 minutes ago
+7 hours ago
+
+synergosai
+
+Deployment failed
+
+7 hours ago
 
 
 New environment
@@ -36,7 +42,7 @@ New environment
 jcheng335
 
 ·
-25 minutes ago
+7 hours ago
 
 synergosai
 Deployments
@@ -77,10 +83,12 @@ History
 
 
 
+
+
 synergosai
 /
-909f548
-Aug 13, 2025, 11:52 PM
+de50563
+Aug 14, 2025, 6:58 AM
 Failed
 
 Get Help
@@ -94,122 +102,122 @@ Filter logs using "", (), AND, OR, -
 
 
 
-You reached the start of the range → Aug 13, 2025, 11:52 PM
+You reached the start of the range → Aug 14, 2025, 6:58 AM
 
- WARN EBADENGINE }
+[stage-0  3/12] COPY .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix
 
-npm WARN EBADENGINE Unsupported engine {
-npm WARN
+[internal] load build context
 
- EBADENGINE   package: 'espree@10.4.0',
-npm WARN EBADENGINE   required: { node: '^18.18.0 || ^20.9.0 || >=21.1.0' },
+[stage-0  2/12] WORKDIR /app/
 
-npm WARN 
+[stage-0 12/12] COPY . /app
 
-EBADENGINE   current: { node: 'v18.17.1', npm: '9.6.7' }
+[stage-0  6/12] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/cache/pip,target=/root/.cache/pip cd frontend && npm install --legacy-peer-deps
 
-npm WARN EBADENGINE }
+[stage-0  1/12] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
 
-npm WARN EBADENGINE Unsupported engine {
-npm WARN EBADENGINE   package: 'react-router@7.8.0',
-npm WARN EBADENGINE   required: { node: '>=20.0.0' },
-npm WARN EBADENGINE
+[internal] load build context  ✔ 1 ms
 
-   current: { node: 'v18.17.1', npm: '9.6.7' }
-npm WARN 
+[internal] load build context
 
-EBADENGINE }
+[stage-0  2/12] WORKDIR /app/  ✔ 0 ms – CACHED
 
-npm WARN EBADENGINE
+[internal] load build context  ✔ 47 ms
 
- Unsupported engine {
-npm 
+[stage-0  3/12] COPY .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix
 
-WARN EBADENGINE   package: 'react-router-dom@7.8.0',
-npm WARN
+[stage-0  3/12] COPY .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix  ✔ 137 ms
 
- EBADENGINE
+[stage-0  4/12] RUN nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d
 
-   required: { node: '>=20.0.0' },
-npm 
+unpacking 'https://github.com/NixOS/nixpkgs/archive/bc8f8d1be58e8c8383e683a06e1e1e57893fff87.tar.gz'; into the Git cache...
 
-WARN 
+installing 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
 
-EBADENGINE
+error:
+       … while calling the 'derivationStrict' builtin
+         at <nix/derivation-internal.nix>:37:12:
+           36|
+           37|   strict = derivationStrict drvAttrs;
+             |            ^
+           38|
 
-   current: { node: 'v18.17.1', npm: '9.6.7' }
-npm WARN
+       … while evaluating derivation 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
+         whose name attribute is located at /nix/store/yfvhrcz7h68gxk06hfgq78din42454ha-source/pkgs/stdenv/generic/make-derivation.nix:336:7
 
- EBADENGINE }
+       … while evaluating attribute 'passAsFile' of derivation 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
+         at /nix/store/yfvhrcz7h68gxk06hfgq78din42454ha-source/pkgs/build-support/trivial-builders/default.nix:60:9:
+           59|         inherit buildCommand name;
+           60|         passAsFile = [ "buildCommand" ]
+             |         ^
+           61|           ++ (derivationArgs.passAsFile or [ ]);
 
+       (stack trace truncated; use '--show-trace' to show the full, detailed trace)
 
-added 311 packages in 7s
+       error: undefined variable 'nodejs-20_x'
+       at /app/.nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix:19:9:
+           18|         '')
+           19|         nodejs-20_x python311 python311Packages.pip
+             |         ^
+           20|       ];
 
-npm notice 
-npm notice New major version of npm available! 9.6.7 -> 11.5.2
-npm notice Changelog: <https://github.com/npm/cli/releases/tag/v11.5.2>;
-npm
-
+✕ [stage-0  4/12] RUN nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d 
+process "/bin/bash -ol pipefail -c nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d" did not complete successfully: exit code: 1
  
 
-notice Run `npm install -g npm@11.5.2` to update!
-npm notice 
-
-[ 6/11] RUN  cd frontend && npm install --legacy-peer-deps  ✔ 7 sec
-
-[ 7/11] RUN  cd backend && pip install -r requirements.txt
-
-error: externally-managed-environment
-
-× This environment is externally managed
-╰─> This command has been disabled as it tries to modify the immutable
-    `/nix/store` filesystem.
-    
-    To use Python with Nix and nixpkgs, have a look at the online documentation:
-    <https://nixos.org/manual/nixpkgs/stable/#python>;.
-
-note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
-hint: See PEP 668 for the detailed specification.
-
-✕ [ 7/11] RUN  cd backend && pip install -r requirements.txt 
-process "/bin/bash -ol pipefail -c cd backend && pip install -r requirements.txt" did not complete successfully: exit code: 1
- 
-
-Dockerfile:20
+Dockerfile:8
 
 -------------------
 
-18 |     COPY . /app/.
+6 |
 
-19 |     RUN  cd frontend && npm install --legacy-peer-deps
+7 |     COPY .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix
 
-20 | >>> RUN  cd backend && pip install -r requirements.txt
+8 | >>> RUN nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d
 
-21 |
+9 |
 
-22 |     # build phase
+10 |
 
 -------------------
 
-ERROR: failed to build: failed to solve: process "/bin/bash -ol pipefail -c cd backend && pip install -r requirements.txt" did not complete successfully: exit code: 1
+ERROR: failed to build: failed to solve: process "/bin/bash -ol pipefail -c nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d" did not complete successfully: exit code: 1
 
 Error: Docker build failed
 
 
 Build failed with 1 error
-[ 7/11] RUN cd backend && pip install -r requirements.txt
-"cd backend && pip install -r requirements.txt" did not complete successfully: exit code: 1
+[stage-0 4/12] RUN nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d
+"nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d" did not complete successfully: exit code: 1
 
 View in context
 
-error: externally-managed-environment
+unpacking 'https://github.com/NixOS/nixpkgs/archive/bc8f8d1be58e8c8383e683a06e1e1e57893fff87.tar.gz' into the Git cache...
 
-× This environment is externally managed
-╰─> This command has been disabled as it tries to modify the immutable
-    `/nix/store` filesystem.
-    
-    To use Python with Nix and nixpkgs, have a look at the online documentation:
-    <https://nixos.org/manual/nixpkgs/stable/#python>.
-note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
-hint: See PEP 668 for the detailed specification.
+installing 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
+
+error:
+
+       … while calling the 'derivationStrict' builtin
+         at <nix/derivation-internal.nix>:37:12:
+           36|
+           37|   strict = derivationStrict drvAttrs;
+             |            ^
+           38|
+       … while evaluating derivation 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
+         whose name attribute is located at /nix/store/yfvhrcz7h68gxk06hfgq78din42454ha-source/pkgs/stdenv/generic/make-derivation.nix:336:7
+       … while evaluating attribute 'passAsFile' of derivation 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
+         at /nix/store/yfvhrcz7h68gxk06hfgq78din42454ha-source/pkgs/build-support/trivial-builders/default.nix:60:9:
+           59|         inherit buildCommand name;
+           60|         passAsFile = [ "buildCommand" ]
+             |         ^
+           61|           ++ (derivationArgs.passAsFile or [ ]);
+       (stack trace truncated; use '--show-trace' to show the full, detailed trace)
+       error: undefined variable 'nodejs-20_x'
+
+       at /app/.nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix:19:9:
+           18|         '')
+           19|         nodejs-20_x python311 python311Packages.pip
+             |         ^
+           20|       ];
 focused-insight | Railway
