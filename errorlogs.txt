@@ -1,0 +1,264 @@
+focused-insight
+
+
+production
+
+Share
+
+Architecture
+Observability
+Logs
+Settings
+
+Activity
+
+synergosai
+
+Deployment failed
+
+4 minutes ago
+
+synergosai
+
+Deployment failed
+
+13 minutes ago
+
+
+New environment
+
+jcheng335
+
+·
+13 minutes ago
+
+synergosai
+Deployments
+Variables
+Metrics
+Settings
+Unexposed service
+us-east4-eqdc4a
+1 Replica
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+History
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+synergosai
+/
+e7c2ae6
+Aug 13, 2025, 11:38 PM
+Failed
+
+Get Help
+
+Details
+Build Logs
+Deploy Logs
+
+Filter
+Filter logs using "", (), AND, OR, -
+
+
+
+You reached the start of the range → Aug 13, 2025, 11:38 PM
+
+npm ERR! node_modules/react
+npm ERR!   react@"^19.1.0" from the root project
+npm ERR!   peer react@">=16.8.0" from @floating-ui/react-dom@2.1.5
+npm 
+
+ERR!   node_modules/@floating-ui/react-dom
+npm ERR!
+
+     @floating-ui/react-dom@"^2.0.0" from @radix-ui/react-popper@1.2.8
+npm ERR!     node_modules/@radix-ui/react-popper
+npm 
+
+ERR!
+
+       @radix-ui/react-popper@"1.2.8" from @radix-ui/react-hover-card@1.1.15
+npm ERR!
+
+       node_modules/@radix-ui/react-hover-card
+npm ERR!
+
+         @radix-ui/react-hover-card@"^1.1.13" from the root project
+npm
+
+ ERR!       4 more (@radix-ui/react-menu, @radix-ui/react-popover, ...)
+npm ERR!   73 more (@radix-ui/react-accordion, ...)
+npm ERR!
+
+ 
+npm ERR!
+
+ Could not resolve dependency:
+npm ERR!
+
+ peer react@"^16.8.0 || ^17.0.0 || ^18.0.0" from react-day-picker@8.10.1
+npm
+
+ ERR! node_modules/react-day-picker
+npm ERR!
+
+   react-day-picker@"8.10.1" from the root project
+npm 
+
+ERR! 
+npm ERR! Conflicting peer dependency: react@18.3.1
+npm 
+
+ERR! node_modules/react
+
+npm 
+
+ERR!   peer react@"^16.8.0 || ^17.0.0 || ^18.0.0" from react-day-picker@8.10.1
+npm ERR!   node_modules/react-day-picker
+npm ERR!
+
+     react-day-picker@"8.10.1" from the root project
+npm
+
+ ERR! 
+npm
+
+ ERR!
+
+ Fix the upstream dependency conflict, or retry
+npm
+
+ ERR! this command with --force or --legacy-peer-deps
+npm ERR!
+
+ to accept an incorrect (and potentially broken) dependency resolution.
+
+npm ERR! 
+npm ERR! 
+npm ERR! For a full report see:
+npm ERR! /root/.npm/_logs/2025-08-14T03_39_31_618Z-eresolve-report.txt
+
+
+
+npm ERR! A complete log of this run can be found in: /root/.npm/_logs/2025-08-14T03_39_31_618Z-debug-0.log
+
+✕ [ 6/11] RUN  cd frontend && npm ci 
+process "/bin/bash -ol pipefail -c cd frontend && npm ci" did not complete successfully: exit code: 1
+ 
+
+Dockerfile:19
+
+-------------------
+
+17 |     # install phase
+
+18 |     COPY . /app/.
+
+19 | >>> RUN  cd frontend && npm ci
+
+20 |     RUN  cd backend && pip install -r requirements.txt
+
+21 |
+
+-------------------
+
+ERROR: failed to build: failed to solve: process "/bin/bash -ol pipefail -c cd frontend && npm ci" did not complete successfully: exit code: 1
+
+Error: Docker build failed
+
+
+Build failed with 1 error
+[ 6/11] RUN cd frontend && npm ci
+"cd frontend && npm ci" did not complete successfully: exit code: 1
+
+View in context
+Truncated to 21 lines
+
+       node_modules/@radix-ui/react-hover-card
+npm ERR!
+
+         @radix-ui/react-hover-card@"^1.1.13" from the root project
+npm
+
+ ERR!       4 more (@radix-ui/react-menu, @radix-ui/react-popover, ...)
+npm ERR!   73 more (@radix-ui/react-accordion, ...)
+npm ERR!
+
+ 
+npm ERR!
+
+ Could not resolve dependency:
+npm ERR!
+
+ peer react@"^16.8.0 || ^17.0.0 || ^18.0.0" from react-day-picker@8.10.1
+npm
+
+ ERR! node_modules/react-day-picker
+npm ERR!
+
+   react-day-picker@"8.10.1" from the root project
+npm 
+
+ERR! 
+npm ERR! Conflicting peer dependency: react@18.3.1
+npm 
+
+ERR! node_modules/react
+
+npm 
+
+ERR!   peer react@"^16.8.0 || ^17.0.0 || ^18.0.0" from react-day-picker@8.10.1
+npm ERR!   node_modules/react-day-picker
+npm ERR!
+
+     react-day-picker@"8.10.1" from the root project
+npm
+
+ ERR! 
+npm
+
+ ERR!
+
+ Fix the upstream dependency conflict, or retry
+npm
+
+ ERR! this command with --force or --legacy-peer-deps
+npm ERR!
+
+ to accept an incorrect (and potentially broken) dependency resolution.
+
+npm ERR! 
+npm ERR! 
+npm ERR! For a full report see:
+npm ERR! /root/.npm/_logs/2025-08-14T03_39_31_618Z-eresolve-report.txt
+
+
+npm ERR! A complete log of this run can be found in: /root/.npm/_logs/2025-08-14T03_39_31_618Z-debug-0.log
+focused-insight | Railway

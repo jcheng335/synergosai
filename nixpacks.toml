@@ -3,7 +3,7 @@ nixPkgs = ["nodejs-18_x", "python3", "python3Packages.pip"]
 
 [phases.install]
 cmds = [
-    "cd frontend && npm ci",
+    "cd frontend && npm install --legacy-peer-deps",
     "cd backend && pip install -r requirements.txt"
 ]
 
