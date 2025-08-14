@@ -16,105 +16,99 @@ Activity
 
 synergosai
 
-Deployment created
+Deployment restarted
 
-1 minute ago
+33 seconds ago
 
 synergosai
 
 Deployment restarted
 
-3 minutes ago
+33 seconds ago
 
 synergosai
 
 Deployment crashed
 
-3 minutes ago
+38 seconds ago
 
 synergosai
 
-Deployment crashed
+Deployment restarted
 
-3 minutes ago
-
-synergosai
-
-Deployment crashed
-
-3 minutes ago
-
-synergosai
-
-Deployment crashed
-
-3 minutes ago
-
-synergosai
-
-Deployment crashed
-
-3 minutes ago
-
-synergosai
-
-Deployment crashed
-
-3 minutes ago
-
-synergosai
-
-Deployment crashed
-
-3 minutes ago
+39 seconds ago
 
 synergosai
 
 Deployment successful
 
-5 minutes ago
+2 minutes ago
 
 synergosai
 
 Deployment failed
 
-8 minutes ago
+15 minutes ago
+
+synergosai
+
+Deployment restarted
+
+17 minutes ago
+
+synergosai
+
+Deployment crashed
+
+17 minutes ago
+
+synergosai
+
+Deployment crashed
+
+17 minutes ago
+
+synergosai
+
+Deployment crashed
+
+17 minutes ago
+
+synergosai
+
+Deployment crashed
+
+17 minutes ago
+
+synergosai
+
+Deployment crashed
+
+17 minutes ago
+
+synergosai
+
+Deployment crashed
+
+17 minutes ago
+
+synergosai
+
+Deployment crashed
+
+17 minutes ago
+
+synergosai
+
+Deployment successful
+
+19 minutes ago
 
 synergosai
 
 Deployment failed
 
-11 minutes ago
-
-synergosai
-
-Deployment crashed
-
-13 minutes ago
-
-synergosai
-
-Deployment crashed
-
-13 minutes ago
-
-synergosai
-
-Deployment crashed
-
-13 minutes ago
-
-synergosai
-
-Deployment crashed
-
-13 minutes ago
-
-synergosai
-
-Deployment crashed
-
-13 minutes ago
+22 minutes ago
 
 
 Fetch More
@@ -127,17 +121,6 @@ Settings
 Unexposed service
 us-east4-eqdc4a
 1 Replica
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -161,11 +144,22 @@ History
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 synergosai
 /
-19fbed7
-Aug 14, 2025, 7:19 AM
-Failed
+9ad0b1c
+Aug 14, 2025, 7:32 AM
+Crashed
 
 Get Help
 
@@ -178,108 +172,81 @@ Filter logs using "", (), AND, OR, -
 
 
 
+You reached the start of the range → Aug 14, 2025, 7:32 AM
 
-Load More
+Starting Container
 
-deleting '/nix/store/pkc7mb4a4qvyz73srkqh4mwl70w98dsv-curl-8.11.0'
+=== Starting Synergos AI Deployment ===
 
-deleting '/nix/store/v9c1s50x7magpiqgycxxkn36avzbcg0g-krb5-1.21.3-lib'
+Building frontend...
 
-deleting '/nix/store/d29r1bdmlvwmj52apgcdxfl1mm9c5782-update-autotools-gnu-config-scripts-hook'
+Installing frontend dependencies...
 
-deleting '/nix/store/1m67ipsk39xvhyqrxnzv2m2p48pil8kl-gnu-config-2024-01-01'
+Frontend build failed: [Errno 2] No such file or directory: 'npm'
 
-deleting '/nix/store/fv7gpnvg922frkh81w5hkdhpz0nw3iiz-mirrors-list'
+Starting backend server...
 
-deleting '/nix/store/00g69vw7c9lycy63h45ximy0wmzqx5y6-diffutils-3.10'
+Traceback (most recent call last):
 
-deleting '/nix/store/dz97fw51rm5bl9kz1vg0haj1j1a7r1mr-nghttp2-1.64.0-dev'
+  File "/app/start.py", line 57, in <module>
 
-deleting '/nix/store/8675pnfr4fqnwv4pzjl67hdwls4q13aa-libssh2-1.11.1'
+    os.chdir('backend')
 
-deleting '/nix/store/grixvx878884hy8x3xs0c0s1i00j632k-nghttp2-1.64.0'
+FileNotFoundError: [Errno 2] No such file or directory: 'backend'
 
-deleting '/nix/store/fkd1ma3nify8r9wp463yg5rqz9hdcyf1-npm-9.9.4.tgz'
+=== Starting Synergos AI Deployment ===
 
-deleting '/nix/store/a3c47r5z1q2c4rz0kvq8hlilkhx2s718-gawk-5.3.1'
+Building frontend...
 
-deleting '/nix/store/1c0dv2pdlshjz5kmjd4dfp3c96yncr23-libraries'
+Installing frontend dependencies...
 
-deleting '/nix/store/agvks3qmzja0yj54szi3vja6vx3cwkkw-curl-8.11.0-man'
+Frontend build failed: [Errno 2] No such file or directory: 'npm'
 
-deleting '/nix/store/na4c03201p0gmhn3bqr089x0xqia157w-source'
+Starting backend server...
 
-deleting '/nix/store/lwi59jcfwk2lnrakmm1y5vw85hj3n1bi-source'
+Traceback (most recent call last):
 
-deleting '/nix/store/jqrz1vq5nz4lnv9pqzydj0ir58wbjfy1-findutils-4.10.0'
+  File "/app/start.py", line 57, in <module>
 
-deleting '/nix/store/abm77lnrkrkb58z6xp1qwjcr1xgkcfwm-gnused-4.9'
+    os.chdir('backend')
 
-deleting '/nix/store/srfxqk119fijwnprgsqvn68ys9kiw0bn-patchelf-0.15.0'
+FileNotFoundError: [Errno 2] No such file or directory: 'backend'
 
-deleting '/nix/store/9l9n7a0v4aibcz0sgd0crs209an9p7dz-openssl-3.3.2'
+=== Starting Synergos AI Deployment ===
 
-deleting '/nix/store/qcghigzrz56vczwlzg9c02vbs6zr9jkz-nghttp2-1.64.0-lib'
+Building frontend...
 
-deleting '/nix/store/mglixp03lsp0w986svwdvm7vcy17rdax-bzip2-1.0.8-bin'
+Installing frontend dependencies...
 
-deleting '/nix/store/2wh1gqyzf5xsvxpdz2k0bxiz583wwq29-keyutils-1.6.3-lib'
+Frontend build failed: [Errno 2] No such file or directory: 'npm'
 
-deleting '/nix/store/fp6cjl1zcmm6mawsnrb5yak1wkz2ma8l-gnumake-4.4.1'
+Starting backend server...
 
-deleting unused links...
+Traceback (most recent call last):
 
-note: currently hard linking saves 16.38 MiB
+  File "/app/start.py", line 57, in <module>
 
-43 store paths deleted, 262.43 MiB freed
+    os.chdir('backend')
 
-[stage-0  4/11] RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d  ✔ 41 sec
+FileNotFoundError: [Errno 2] No such file or directory: 'backend'
 
-[stage-0  5/11] COPY . /app/.
+=== Starting Synergos AI Deployment ===
 
-[stage-0  5/11] COPY . /app/.  ✔ 189 ms
+Building frontend...
 
-[stage-0  6/11] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm npm install
+Installing frontend dependencies...
 
-npm warn config production Use `--omit=dev` instead.
+Frontend build failed: [Errno 2] No such file or directory: 'npm'
 
+Starting backend server...
 
-up to date, audited 1 package in 298ms
+Traceback (most recent call last):
 
+  File "/app/start.py", line 57, in <module>
 
-found 0 vulnerabilities
+    os.chdir('backend')
 
-[stage-0  6/11] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm npm install  ✔ 497 ms
-
-[stage-0  7/11] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm pip install -r requirements.txt
-
-/bin/bash: line 1: pip: command not found
-
-✕ [stage-0  7/11] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm pip install -r requirements.txt 
-process "/bin/bash -ol pipefail -c pip install -r requirements.txt" did not complete successfully: exit code: 127
- 
-
-Dockerfile:21
-
--------------------
-
-19 |     COPY . /app/.
-
-20 |     RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm npm install
-
-21 | >>> RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm pip install -r requirements.txt
-
-22 |
-
-23 |     # build phase
-
--------------------
-
-ERROR: failed to build: failed to solve: process "/bin/bash -ol pipefail -c pip install -r requirements.txt" did not complete successfully: exit code: 127
-
-Error: Docker build failed
-
-Load More
+FileNotFoundError: [Errno 2] No such file or directory: 'backend'
 
 
 synergosai | Railway
