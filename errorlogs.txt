@@ -19,60 +19,35 @@ synergosai
 
 Deployment crashed
 
-5 seconds ago
+3 minutes ago
 
 synergosai
 
 Deployment restarted
 
-10 seconds ago
+3 minutes ago
 
 synergosai
 
 Deployment restarted
 
-10 seconds ago
+3 minutes ago
 
 synergosai
 
 Deployment restarted
 
-15 seconds ago
+3 minutes ago
 
 synergosai
 
 Deployment restarted
 
-15 seconds ago
+3 minutes ago
 
 synergosai
 
 Deployment restarted
-
-15 seconds ago
-
-synergosai
-
-Deployment restarted
-
-15 seconds ago
-
-synergosai
-
-Deployment successful
-
-1 minute ago
-
-
-8 changes in synergosai
-
-jcheng335
-
-·
-2 minutes ago
-synergosai
-
-Deployment successful
 
 4 minutes ago
 
@@ -80,13 +55,13 @@ synergosai
 
 Deployment restarted
 
-8 minutes ago
+4 minutes ago
 
 synergosai
 
-Deployment restarted
+Deployment successful
 
-8 minutes ago
+6 minutes ago
 
 synergosai
 
@@ -102,21 +77,58 @@ Deployment restarted
 
 synergosai
 
-Deployment successful
+Deployment restarted
 
-9 minutes ago
-
-synergosai
-
-Deployment failed
-
-22 minutes ago
+8 minutes ago
 
 synergosai
 
 Deployment restarted
 
-24 minutes ago
+8 minutes ago
+
+synergosai
+
+Deployment restarted
+
+8 minutes ago
+
+synergosai
+
+Deployment restarted
+
+8 minutes ago
+
+synergosai
+
+Deployment restarted
+
+8 minutes ago
+
+synergosai
+
+Deployment successful
+
+9 minutes ago
+
+
+8 changes in synergosai
+
+jcheng335
+
+·
+9 minutes ago
+synergosai
+
+Deployment successful
+
+11 minutes ago
+
+synergosai
+
+Deployment restarted
+
+15 minutes ago
 
 
 Fetch More
@@ -154,8 +166,8 @@ History
 
 synergosai
 /
-0d278d0
-Aug 14, 2025, 7:39 AM
+79446e4
+Aug 14, 2025, 7:43 AM
 Crashed
 
 synergosai-production.up.railway.app
@@ -171,19 +183,25 @@ Filter logs using "", (), AND, OR, -
 
 
 
-You reached the start of the range → Aug 14, 2025, 7:39 AM
+You reached the start of the range → Aug 14, 2025, 7:43 AM
 
-Starting Container
+[2025-08-14 11:45:27 +0000] [4] [INFO] Worker exiting (pid: 4)
 
-[2025-08-14 11:40:49 +0000] [1] [INFO] Starting gunicorn 21.2.0
+[2025-08-14 11:45:27 +0000] [1] [ERROR] Worker (pid:4) exited with code 3
 
-[2025-08-14 11:40:49 +0000] [1] [INFO] Listening at: http://0.0.0.0:5001 (1)
+[2025-08-14 11:45:27 +0000] [1] [ERROR] Shutting down: Master
 
-[2025-08-14 11:40:49 +0000] [1] [INFO] Using worker: sync
+[2025-08-14 11:45:27 +0000] [1] [ERROR] Reason: Worker failed to boot.
 
-[2025-08-14 11:40:49 +0000] [4] [INFO] Booting worker with pid: 4
+[2025-08-14 11:45:29 +0000] [1] [INFO] Starting gunicorn 21.2.0
 
-[2025-08-14 11:40:50 +0000] [4] [ERROR] Exception in worker process
+[2025-08-14 11:45:29 +0000] [1] [INFO] Listening at: http://0.0.0.0:5001 (1)
+
+[2025-08-14 11:45:29 +0000] [1] [INFO] Using worker: sync
+
+[2025-08-14 11:45:29 +0000] [4] [INFO] Booting worker with pid: 4
+
+[2025-08-14 11:45:30 +0000] [4] [ERROR] Exception in worker process
 
 Traceback (most recent call last):
 
@@ -247,7 +265,7 @@ Traceback (most recent call last):
 
     from src.main import app
 
-  File "/app/backend/src/main.py", line 47, in <module>
+  File "/app/backend/src/main.py", line 53, in <module>
 
     db.init_app(app)
 
@@ -275,11 +293,13 @@ Traceback (most recent call last):
 
 ValueError: invalid literal for int() with base 10: 'port'
 
-[2025-08-14 11:40:50 +0000] [4] [INFO] Worker exiting (pid: 4)
+[2025-08-14 11:45:30 +0000] [4] [INFO] Worker exiting (pid: 4)
 
-[2025-08-14 11:40:50 +0000] [1] [ERROR] Worker (pid:4) exited with code 3
+[2025-08-14 11:45:30 +0000] [1] [ERROR] Worker (pid:4) exited with code 3
 
-[2025-08-14 11:40:50 +0000] [1] [ERROR] Shutting down: Master
+[2025-08-14 11:45:30 +0000] [1] [ERROR] Shutting down: Master
+
+[2025-08-14 11:45:30 +0000] [1] [ERROR] Reason: Worker failed to boot.
 
 
 focused-insight | Railway
