@@ -197,6 +197,7 @@ def add_job_url():
 def analyze_documents(interview_id):
     """Analyze uploaded documents and generate questions."""
     try:
+        print(f"Starting analysis for interview {interview_id}")
         interview = Interview.query.get_or_404(interview_id)
         
         # Get documents
@@ -209,8 +210,16 @@ def analyze_documents(interview_id):
         job_listing_text = documents['job_listing'].extracted_text
         company_questions = documents.get('questions', {}).get('extracted_text', '')
         
+        print(f"Documents loaded - Resume: {len(resume_text)} chars, Job: {len(job_listing_text)} chars")
+        
+        # Check if API key is configured
+        import os
+        api_key_configured = bool(os.environ.get('OPENAI_API_KEY'))
+        print(f"OpenAI API key configured: {api_key_configured}")
+        
         # Analyze documents
         analysis_result = ai_service.analyze_documents(resume_text, job_listing_text, company_questions)
+        print(f"Analysis complete: {list(analysis_result.keys())}")
         
         # Store analysis results
         documents['resume'].analysis_result = json.dumps(analysis_result)

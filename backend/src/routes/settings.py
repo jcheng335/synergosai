@@ -5,13 +5,17 @@ import json
 settings_bp = Blueprint('settings', __name__)
 
 # Store API keys in memory (in production, use secure storage)
+# Initialize from environment variables (Railway or local)
 api_keys = {
-    'openai': '',
-    'aws_access_key': '',
-    'aws_secret_key': '',
-    'aws_region': 'us-east-1',
-    'ai_provider': 'openai'
+    'openai': os.environ.get('OPENAI_API_KEY', ''),
+    'aws_access_key': os.environ.get('AWS_ACCESS_KEY_ID', ''),
+    'aws_secret_key': os.environ.get('AWS_SECRET_ACCESS_KEY', ''),
+    'aws_region': os.environ.get('AWS_DEFAULT_REGION', 'us-east-1'),
+    'ai_provider': os.environ.get('AI_PROVIDER', 'openai')
 }
+
+# Log initial configuration (without sensitive data)
+print(f"API Keys initialized - OpenAI: {bool(api_keys['openai'])}, AWS: {bool(api_keys['aws_access_key'])}")
 
 @settings_bp.route('/settings/api-keys', methods=['POST'])
 def save_api_keys():

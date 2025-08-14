@@ -1,15 +1,72 @@
 import json
 import re
+import os
 from typing import List, Dict, Any, Optional
 
 class AIService:
     def __init__(self):
-        # Simple implementation without OpenAI dependency
-        pass
+        # Try to use OpenAI if API key is available
+        self.openai_client = None
+        self.api_key = os.environ.get('OPENAI_API_KEY', '')
+        
+        if self.api_key:
+            try:
+                from openai import OpenAI
+                self.openai_client = OpenAI(api_key=self.api_key)
+                print("AI Service initialized with OpenAI")
+            except Exception as e:
+                print(f"Failed to initialize OpenAI: {e}")
+                self.openai_client = None
+        else:
+            print("AI Service running in fallback mode (no API key)")
     
     def analyze_documents(self, resume_text: str, job_listing_text: str, company_questions: str = "") -> Dict[str, Any]:
         """Analyze uploaded documents to extract key information."""
-        # Simplified analysis without AI
+        
+        # If OpenAI is available, use it for analysis
+        if self.openai_client:
+            try:
+                prompt = f"""Analyze the following resume and job listing to extract key information.
+
+Resume:
+{resume_text[:2000]}
+
+Job Listing:
+{job_listing_text[:2000]}
+
+Provide a JSON analysis with:
+1. candidate_profile: key skills, experience, achievements, strengths, concerns
+2. job_requirements: required skills, responsibilities, culture indicators
+3. match_analysis: skill match percentage, alignment, gaps, strengths to highlight
+
+Return only valid JSON."""
+
+                response = self.openai_client.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {"role": "system", "content": "You are an expert HR analyst. Provide analysis in JSON format."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    max_tokens=800,
+                    temperature=0.7
+                )
+                
+                # Parse the response
+                content = response.choices[0].message.content
+                # Try to extract JSON from the response
+                try:
+                    # Find JSON in the response
+                    import re
+                    json_match = re.search(r'\{.*\}', content, re.DOTALL)
+                    if json_match:
+                        return json.loads(json_match.group())
+                except:
+                    pass
+                    
+            except Exception as e:
+                print(f"OpenAI analysis failed: {e}")
+        
+        # Fallback to simple analysis
         return {
             "candidate_profile": {
                 "key_skills": ["Python", "JavaScript", "React", "Flask", "SQL"],
@@ -61,7 +118,48 @@ class AIService:
     
     def generate_interview_questions(self, analysis_result: Dict[str, Any], num_questions: int = 5) -> List[Dict[str, str]]:
         """Generate tailored interview questions based on document analysis."""
-        # Pre-defined questions based on common scenarios
+        
+        # If OpenAI is available, generate contextual questions
+        if self.openai_client:
+            try:
+                prompt = f"""Based on this candidate analysis, generate {num_questions} tailored interview questions.
+
+Analysis: {json.dumps(analysis_result, indent=2)[:1500]}
+
+Generate questions that:
+1. Explore gaps between candidate skills and job requirements
+2. Assess technical competencies mentioned in resume
+3. Evaluate behavioral fit based on job culture
+4. Include STAR-based situational questions
+
+Return as JSON array with format:
+[{{"text": "question", "category": "technical/behavioral/situational/cultural", "rationale": "why this question"}}]"""
+
+                response = self.openai_client.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=[
+                        {"role": "system", "content": "You are an expert interviewer. Generate insightful questions."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    max_tokens=600,
+                    temperature=0.8
+                )
+                
+                content = response.choices[0].message.content
+                # Try to extract JSON array
+                try:
+                    import re
+                    json_match = re.search(r'\[.*\]', content, re.DOTALL)
+                    if json_match:
+                        questions = json.loads(json_match.group())
+                        return questions[:num_questions]
+                except:
+                    pass
+                    
+            except Exception as e:
+                print(f"OpenAI question generation failed: {e}")
+        
+        # Fallback: Pre-defined questions based on common scenarios
         questions = [
             {
                 "text": "Tell me about a challenging technical problem you solved and how you approached it.",
