@@ -12,103 +12,111 @@ Settings
 
 
 
+
 Activity
 
 synergosai
 
-Deployment restarted
-
-33 seconds ago
-
-synergosai
-
-Deployment restarted
-
-33 seconds ago
-
-synergosai
-
 Deployment crashed
 
-38 seconds ago
+5 seconds ago
 
 synergosai
 
 Deployment restarted
 
-39 seconds ago
+10 seconds ago
+
+synergosai
+
+Deployment restarted
+
+10 seconds ago
+
+synergosai
+
+Deployment restarted
+
+15 seconds ago
+
+synergosai
+
+Deployment restarted
+
+15 seconds ago
+
+synergosai
+
+Deployment restarted
+
+15 seconds ago
+
+synergosai
+
+Deployment restarted
+
+15 seconds ago
 
 synergosai
 
 Deployment successful
 
+1 minute ago
+
+
+8 changes in synergosai
+
+jcheng335
+
+·
 2 minutes ago
-
 synergosai
 
-Deployment failed
+Deployment successful
 
-15 minutes ago
+4 minutes ago
 
 synergosai
 
 Deployment restarted
 
-17 minutes ago
+8 minutes ago
+
+synergosai
+
+Deployment restarted
+
+8 minutes ago
 
 synergosai
 
 Deployment crashed
 
-17 minutes ago
+8 minutes ago
 
 synergosai
 
-Deployment crashed
+Deployment restarted
 
-17 minutes ago
-
-synergosai
-
-Deployment crashed
-
-17 minutes ago
-
-synergosai
-
-Deployment crashed
-
-17 minutes ago
-
-synergosai
-
-Deployment crashed
-
-17 minutes ago
-
-synergosai
-
-Deployment crashed
-
-17 minutes ago
-
-synergosai
-
-Deployment crashed
-
-17 minutes ago
+8 minutes ago
 
 synergosai
 
 Deployment successful
 
-19 minutes ago
+9 minutes ago
 
 synergosai
 
 Deployment failed
 
 22 minutes ago
+
+synergosai
+
+Deployment restarted
+
+24 minutes ago
 
 
 Fetch More
@@ -118,7 +126,7 @@ Deployments
 Variables
 Metrics
 Settings
-Unexposed service
+synergosai-production.up.railway.app
 us-east4-eqdc4a
 1 Replica
 
@@ -144,109 +152,135 @@ History
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 synergosai
 /
-9ad0b1c
-Aug 14, 2025, 7:32 AM
+0d278d0
+Aug 14, 2025, 7:39 AM
 Crashed
 
+synergosai-production.up.railway.app
 Get Help
 
 Details
 Build Logs
 Deploy Logs
+HTTP Logs
 
 Filter
 Filter logs using "", (), AND, OR, -
 
 
 
-You reached the start of the range → Aug 14, 2025, 7:32 AM
+You reached the start of the range → Aug 14, 2025, 7:39 AM
 
 Starting Container
 
-=== Starting Synergos AI Deployment ===
+[2025-08-14 11:40:49 +0000] [1] [INFO] Starting gunicorn 21.2.0
 
-Building frontend...
+[2025-08-14 11:40:49 +0000] [1] [INFO] Listening at: http://0.0.0.0:5001 (1)
 
-Installing frontend dependencies...
+[2025-08-14 11:40:49 +0000] [1] [INFO] Using worker: sync
 
-Frontend build failed: [Errno 2] No such file or directory: 'npm'
+[2025-08-14 11:40:49 +0000] [4] [INFO] Booting worker with pid: 4
 
-Starting backend server...
-
-Traceback (most recent call last):
-
-  File "/app/start.py", line 57, in <module>
-
-    os.chdir('backend')
-
-FileNotFoundError: [Errno 2] No such file or directory: 'backend'
-
-=== Starting Synergos AI Deployment ===
-
-Building frontend...
-
-Installing frontend dependencies...
-
-Frontend build failed: [Errno 2] No such file or directory: 'npm'
-
-Starting backend server...
+[2025-08-14 11:40:50 +0000] [4] [ERROR] Exception in worker process
 
 Traceback (most recent call last):
 
-  File "/app/start.py", line 57, in <module>
+  File "/opt/venv/lib/python3.12/site-packages/gunicorn/arbiter.py", line 609, in spawn_worker
 
-    os.chdir('backend')
+    worker.init_process()
 
-FileNotFoundError: [Errno 2] No such file or directory: 'backend'
+  File "/opt/venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 134, in init_process
 
-=== Starting Synergos AI Deployment ===
+    self.load_wsgi()
 
-Building frontend...
+  File "/opt/venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 146, in load_wsgi
 
-Installing frontend dependencies...
+    self.wsgi = self.app.wsgi()
 
-Frontend build failed: [Errno 2] No such file or directory: 'npm'
+                ^^^^^^^^^^^^^^^
 
-Starting backend server...
+  File "/opt/venv/lib/python3.12/site-packages/gunicorn/app/base.py", line 67, in wsgi
 
-Traceback (most recent call last):
+    self.callable = self.load()
 
-  File "/app/start.py", line 57, in <module>
+                    ^^^^^^^^^^^
 
-    os.chdir('backend')
+  File "/opt/venv/lib/python3.12/site-packages/gunicorn/app/wsgiapp.py", line 58, in load
 
-FileNotFoundError: [Errno 2] No such file or directory: 'backend'
+    return self.load_wsgiapp()
 
-=== Starting Synergos AI Deployment ===
+           ^^^^^^^^^^^^^^^^^^^
 
-Building frontend...
+  File "/opt/venv/lib/python3.12/site-packages/gunicorn/app/wsgiapp.py", line 48, in load_wsgiapp
 
-Installing frontend dependencies...
+    return util.import_app(self.app_uri)
 
-Frontend build failed: [Errno 2] No such file or directory: 'npm'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Starting backend server...
+  File "/opt/venv/lib/python3.12/site-packages/gunicorn/util.py", line 371, in import_app
 
-Traceback (most recent call last):
+    mod = importlib.import_module(module)
 
-  File "/app/start.py", line 57, in <module>
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    os.chdir('backend')
+  File "/root/.nix-profile/lib/python3.12/importlib/__init__.py", line 90, in import_module
 
-FileNotFoundError: [Errno 2] No such file or directory: 'backend'
+    return _bootstrap._gcd_import(name[level:], package, level)
+
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+
+  File "/app/app_wrapper.py", line 13, in <module>
+
+    from src.main import app
+
+  File "/app/backend/src/main.py", line 47, in <module>
+
+    db.init_app(app)
+
+  File "/opt/venv/lib/python3.12/site-packages/flask_sqlalchemy/extension.py", line 373, in init_app
+
+    self._apply_driver_defaults(options, app)
+
+  File "/opt/venv/lib/python3.12/site-packages/flask_sqlalchemy/extension.py", line 607, in _apply_driver_defaults
+
+    url = sa.engine.make_url(options["url"])
+
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/opt/venv/lib/python3.12/site-packages/sqlalchemy/engine/url.py", line 856, in make_url
+
+    return _parse_url(name_or_url)
+
+           ^^^^^^^^^^^^^^^^^^^^^^^
+
+  File "/opt/venv/lib/python3.12/site-packages/sqlalchemy/engine/url.py", line 917, in _parse_url
+
+    components["port"] = int(components["port"])
+
+                         ^^^^^^^^^^^^^^^^^^^^^^^
+
+ValueError: invalid literal for int() with base 10: 'port'
+
+[2025-08-14 11:40:50 +0000] [4] [INFO] Worker exiting (pid: 4)
+
+[2025-08-14 11:40:50 +0000] [1] [ERROR] Worker (pid:4) exited with code 3
+
+[2025-08-14 11:40:50 +0000] [1] [ERROR] Shutting down: Master
 
 
-synergosai | Railway
+focused-insight | Railway
+500

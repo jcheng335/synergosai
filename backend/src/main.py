@@ -33,11 +33,17 @@ app.register_blueprint(settings_bp, url_prefix='/api')
 
 # Database configuration
 if IS_PRODUCTION:
-    # Use PostgreSQL on Railway
+    # Use PostgreSQL on Railway if available, otherwise SQLite
     database_url = os.environ.get('DATABASE_URL')
-    if database_url and database_url.startswith('postgres://'):
-        database_url = database_url.replace('postgres://', 'postgresql://', 1)
-    app.config['SQLALCHEMY_DATABASE_URI'] = database_url or f"sqlite:///{os.path.join('/tmp', 'app.db')}"
+    if database_url:
+        # Fix postgres:// to postgresql:// for SQLAlchemy compatibility
+        if database_url.startswith('postgres://'):
+            database_url = database_url.replace('postgres://', 'postgresql://', 1)
+        app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+    else:
+        # Use SQLite as fallback in production
+        os.makedirs('/tmp/database', exist_ok=True)
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/database/app.db'
 else:
     # Use SQLite for development
     os.makedirs(os.path.join(os.path.dirname(__file__), 'database'), exist_ok=True)
