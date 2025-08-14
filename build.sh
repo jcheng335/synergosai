@@ -3,6 +3,10 @@
 
 echo "🚀 Starting build process..."
 
+# Install Python dependencies
+echo "🐍 Installing Python dependencies..."
+pip install -r requirements.txt
+
 # Install frontend dependencies
 echo "📦 Installing frontend dependencies..."
 cd frontend

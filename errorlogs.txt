@@ -10,13 +10,21 @@ Observability
 Logs
 Settings
 
+
+
 Activity
 
 synergosai
 
 Deployment failed
 
-36 seconds ago
+2 minutes ago
+
+synergosai
+
+Deployment failed
+
+6 minutes ago
 
 synergosai
 
@@ -34,7 +42,7 @@ synergosai
 
 Deployment failed
 
-7 hours ago
+8 hours ago
 
 
 New environment
@@ -42,7 +50,7 @@ New environment
 jcheng335
 
 ·
-7 hours ago
+8 hours ago
 
 synergosai
 Deployments
@@ -85,10 +93,12 @@ History
 
 
 
+
+
 synergosai
 /
-de50563
-Aug 14, 2025, 6:58 AM
+4b3507c
+Aug 14, 2025, 7:01 AM
 Failed
 
 Get Help
@@ -102,122 +112,138 @@ Filter logs using "", (), AND, OR, -
 
 
 
-You reached the start of the range → Aug 14, 2025, 6:58 AM
+You reached the start of the range → Aug 14, 2025, 7:01 AM
 
-[stage-0  3/12] COPY .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix
+deleting '/nix/store/1c0dv2pdlshjz5kmjd4dfp3c96yncr23-libraries'
 
-[internal] load build context
+deleting '/nix/store/srfxqk119fijwnprgsqvn68ys9kiw0bn-patchelf-0.15.0'
 
-[stage-0  2/12] WORKDIR /app/
+deleting unused links...
 
-[stage-0 12/12] COPY . /app
+note: currently hard linking saves 2.94 MiB
 
-[stage-0  6/12] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/cache/pip,target=/root/.cache/pip cd frontend && npm install --legacy-peer-deps
+61 store paths deleted, 559.40 MiB freed
 
-[stage-0  1/12] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+[stage-0  4/10] RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d  ✔ 33 sec
 
-[internal] load build context  ✔ 1 ms
+[stage-0  5/10] COPY . /app/.
 
-[internal] load build context
+[stage-0  5/10] COPY . /app/.  ✔ 77 ms
 
-[stage-0  2/12] WORKDIR /app/  ✔ 0 ms – CACHED
+[stage-0  6/10] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm npm i
 
-[internal] load build context  ✔ 47 ms
+npm warn config production Use `--omit=dev` instead.
 
-[stage-0  3/12] COPY .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix
 
-[stage-0  3/12] COPY .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix  ✔ 137 ms
+up to date, audited 1 package in 269ms
 
-[stage-0  4/12] RUN nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d
 
-unpacking 'https://github.com/NixOS/nixpkgs/archive/bc8f8d1be58e8c8383e683a06e1e1e57893fff87.tar.gz'; into the Git cache...
+found 0 vulnerabilities
 
-installing 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
+[stage-0  6/10] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-/root/npm,target=/root/.npm npm i  ✔ 422 ms
 
-error:
-       … while calling the 'derivationStrict' builtin
-         at <nix/derivation-internal.nix>:37:12:
-           36|
-           37|   strict = derivationStrict drvAttrs;
-             |            ^
-           38|
+[stage-0  7/10] COPY . /app/.
 
-       … while evaluating derivation 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
-         whose name attribute is located at /nix/store/yfvhrcz7h68gxk06hfgq78din42454ha-source/pkgs/stdenv/generic/make-derivation.nix:336:7
+[stage-0  7/10] COPY . /app/.  ✔ 27 ms
 
-       … while evaluating attribute 'passAsFile' of derivation 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
-         at /nix/store/yfvhrcz7h68gxk06hfgq78din42454ha-source/pkgs/build-support/trivial-builders/default.nix:60:9:
-           59|         inherit buildCommand name;
-           60|         passAsFile = [ "buildCommand" ]
-             |         ^
-           61|           ++ (derivationArgs.passAsFile or [ ]);
+[stage-0  8/10] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-node_modules/cache,target=/app/node_modules/.cache npm run build
 
-       (stack trace truncated; use '--show-trace' to show the full, detailed trace)
+npm warn config production Use `--omit=dev` instead.
 
-       error: undefined variable 'nodejs-20_x'
-       at /app/.nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix:19:9:
-           18|         '')
-           19|         nodejs-20_x python311 python311Packages.pip
-             |         ^
-           20|       ];
 
-✕ [stage-0  4/12] RUN nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d 
-process "/bin/bash -ol pipefail -c nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d" did not complete successfully: exit code: 1
+> synergosai@1.0.0 build
+> cd frontend && npm install --legacy-peer-deps && npm run build && cp -r dist/* ../backend/src/static/
+
+
+npm warn config production Use `--omit=dev` instead.
+
+
+added 311 packages in 5s
+
+npm warn config production Use `--omit=dev` instead.
+
+
+> synergos-ai-frontend@0.0.0 build
+> vite build
+
+
+vite v6.3.5 building for production...
+
+transforming...
+
+✓ 1637 modules transformed.
+
+✗ Build failed in 1.10s
+
+error during build:
+[vite:load-fallback] Could not load /app/frontend/src/lib/utils (imported by src/components/ui/button.jsx): ENOENT: no such file or directory, open '/app/frontend/src/lib/utils'
+    at async open (node:internal/fs/promises:638:25)
+    at async Object.readFile (node:internal/fs/promises:1238:14)
+    at async Object.handler (file:///app/frontend/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:45843:27)
+    at async PluginDriver.hookFirstAndGetPlugin (file:///app/frontend/node_modules/rollup/dist/es/shared/node-entry.js:22233:28)
+    at async file:///app/frontend/node_modules/rollup/dist/es/shared/node-entry.js:21237:33
+    at async Queue.work (file:///app/frontend/node_modules/rollup/dist/es/shared/node-entry.js:22461:32)
+
+✕ [stage-0  8/10] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-node_modules/cache,target=/app/node_modules/.cache npm run build 
+process "/bin/bash -ol pipefail -c npm run build" did not complete successfully: exit code: 1
  
 
-Dockerfile:8
+Dockerfile:24
 
 -------------------
 
-6 |
+22 |     # build phase
 
-7 |     COPY .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix
+23 |     COPY . /app/.
 
-8 | >>> RUN nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d
+24 | >>> RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-node_modules/cache,target=/app/node_modules/.cache npm run build
 
-9 |
+25 |
 
-10 |
+26 |
 
 -------------------
 
-ERROR: failed to build: failed to solve: process "/bin/bash -ol pipefail -c nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d" did not complete successfully: exit code: 1
+ERROR: failed to build: failed to solve: process "/bin/bash -ol pipefail -c npm run build" did not complete successfully: exit code: 1
 
 Error: Docker build failed
 
 
 Build failed with 1 error
-[stage-0 4/12] RUN nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d
-"nix-env -if .nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix && nix-collect-garbage -d" did not complete successfully: exit code: 1
+[stage-0 8/10] RUN --mount=type=cache,id=s/56c96f18-7800-41f8-b9ae-3215e188a979-node_modules/cache,target=/app/node_modules/.cache npm run build
+"npm run build" did not complete successfully: exit code: 1
 
 View in context
 
-unpacking 'https://github.com/NixOS/nixpkgs/archive/bc8f8d1be58e8c8383e683a06e1e1e57893fff87.tar.gz' into the Git cache...
+npm warn config production Use `--omit=dev` instead.
 
-installing 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
+> synergosai@1.0.0 build
+> cd frontend && npm install --legacy-peer-deps && npm run build && cp -r dist/* ../backend/src/static/
 
-error:
+npm warn config production Use `--omit=dev` instead.
 
-       … while calling the 'derivationStrict' builtin
-         at <nix/derivation-internal.nix>:37:12:
-           36|
-           37|   strict = derivationStrict drvAttrs;
-             |            ^
-           38|
-       … while evaluating derivation 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
-         whose name attribute is located at /nix/store/yfvhrcz7h68gxk06hfgq78din42454ha-source/pkgs/stdenv/generic/make-derivation.nix:336:7
-       … while evaluating attribute 'passAsFile' of derivation 'bc8f8d1be58e8c8383e683a06e1e1e57893fff87-env'
-         at /nix/store/yfvhrcz7h68gxk06hfgq78din42454ha-source/pkgs/build-support/trivial-builders/default.nix:60:9:
-           59|         inherit buildCommand name;
-           60|         passAsFile = [ "buildCommand" ]
-             |         ^
-           61|           ++ (derivationArgs.passAsFile or [ ]);
-       (stack trace truncated; use '--show-trace' to show the full, detailed trace)
-       error: undefined variable 'nodejs-20_x'
+added 311 packages in 5s
 
-       at /app/.nixpacks/nixpkgs-bc8f8d1be58e8c8383e683a06e1e1e57893fff87.nix:19:9:
-           18|         '')
-           19|         nodejs-20_x python311 python311Packages.pip
-             |         ^
-           20|       ];
+npm warn config production Use `--omit=dev` instead.
+
+> synergos-ai-frontend@0.0.0 build
+> vite build
+
+vite v6.3.5 building for production...
+
+transforming...
+
+✓ 1637 modules transformed.
+
+✗ Build failed in 1.10s
+
+error during build:
+[31m[vite:load-fallback] Could not load /app/frontend/src/lib/utils (imported by src/components/ui/button.jsx): ENOENT: no such file or directory, open '/app/frontend/src/lib/utils'[31m
+
+    at async open (node:internal/fs/promises:638:25)
+    at async Object.readFile (node:internal/fs/promises:1238:14)
+    at async Object.handler (file:///app/frontend/node_modules/vite/dist/node/chunks/dep-DBxKXgDP.js:45843:27)
+    at async PluginDriver.hookFirstAndGetPlugin (file:///app/frontend/node_modules/rollup/dist/es/shared/node-entry.js:22233:28)
+    at async file:///app/frontend/node_modules/rollup/dist/es/shared/node-entry.js:21237:33
+    at async Queue.work (file:///app/frontend/node_modules/rollup/dist/es/shared/node-entry.js:22461:32)
 focused-insight | Railway
