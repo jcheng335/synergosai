@@ -33,25 +33,51 @@ app.register_blueprint(settings_bp, url_prefix='/api')
 
 # Database configuration
 if IS_PRODUCTION:
-    # For now, always use SQLite in production until PostgreSQL is properly configured
-    # Railway might have a placeholder DATABASE_URL that's causing issues
-    print("Production mode: Using SQLite database")
-    os.makedirs('/tmp/database', exist_ok=True)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/database/app.db'
-    
-    # Log if DATABASE_URL is set (for debugging)
+    # Use PostgreSQL in production
     database_url = os.environ.get('DATABASE_URL', '')
+    
     if database_url:
-        print(f"Note: DATABASE_URL is set but not used: '{database_url[:30]}...'")
+        # Railway provides internal URLs, we need to handle both internal and external
+        # Internal URL format: postgresql://user:pass@postgres.railway.internal:5432/railway
+        print(f"Production mode: Connecting to PostgreSQL")
+        
+        # If the URL starts with postgres://, update it to postgresql://
+        if database_url.startswith('postgres://'):
+            database_url = database_url.replace('postgres://', 'postgresql://', 1)
+        
+        app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+        print(f"Database URL configured (first 50 chars): {database_url[:50]}...")
+    else:
+        # Fallback to SQLite if no DATABASE_URL is set
+        print("Warning: DATABASE_URL not set, falling back to SQLite")
+        os.makedirs('/tmp/database', exist_ok=True)
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/database/app.db'
 else:
     # Use SQLite for development
     os.makedirs(os.path.join(os.path.dirname(__file__), 'database'), exist_ok=True)
     app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Additional PostgreSQL configuration for better performance
+if IS_PRODUCTION and 'postgresql' in app.config.get('SQLALCHEMY_DATABASE_URI', ''):
+    app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
+        'pool_size': 10,
+        'pool_recycle': 300,
+        'pool_pre_ping': True,
+        'max_overflow': 20
+    }
+    print("PostgreSQL connection pool configured")
+
 db.init_app(app)
 with app.app_context():
-    db.create_all()
+    try:
+        db.create_all()
+        print("Database tables created/verified successfully")
+    except Exception as e:
+        print(f"Database initialization error: {e}")
+        # Don't fail the app startup, just log the error
+        pass
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
