@@ -228,13 +228,22 @@ def analyze_documents(interview_id):
         generated_questions = []
         
         if api_key_configured:
-            # Use OpenAI for more intelligent question generation
+            # Try direct generation first (often more specific)
             try:
-                print("Using OpenAI for tailored question generation...")
-                generated_questions = ai_service.generate_interview_questions(analysis_result, num_questions=7)
-                print(f"Generated {len(generated_questions)} tailored questions using OpenAI")
+                print("Using OpenAI direct generation for highly tailored questions...")
+                generated_questions = ai_service.generate_direct_questions(resume_text, job_listing_text, num_questions=7)
+                print(f"Generated {len(generated_questions)} direct tailored questions")
             except Exception as e:
-                print(f"OpenAI generation failed: {str(e)}")
+                print(f"Direct generation failed: {str(e)}")
+            
+            # Fallback to analysis-based generation
+            if not generated_questions:
+                try:
+                    print("Falling back to analysis-based generation...")
+                    generated_questions = ai_service.generate_interview_questions(analysis_result, num_questions=7)
+                    print(f"Generated {len(generated_questions)} analysis-based questions")
+                except Exception as e:
+                    print(f"Analysis-based generation also failed: {str(e)}")
         
         # Fallback to contextual generator if OpenAI fails or is not configured
         if not generated_questions:

@@ -57,7 +57,7 @@ class AIService:
         
         try:
             response = self.client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4-turbo-preview",  # More capable model
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.3
             )
@@ -81,59 +81,52 @@ class AIService:
         job = analysis_result.get('job_requirements', {})
         match = analysis_result.get('match_analysis', {})
         
+        # Create a more direct prompt with the actual resume and job text
         prompt = f"""
-        You are an expert interviewer. Generate {num_questions} HIGHLY TAILORED interview questions based on this specific candidate and job.
+        You are conducting an interview for {job.get('job_title', 'this position')} at {job.get('company_name', 'our company')}.
         
-        CANDIDATE PROFILE:
-        - Skills: {candidate.get('key_skills', [])}
-        - Current Role: {candidate.get('current_role', 'Not specified')}
-        - Companies: {candidate.get('companies_worked', [])}
-        - Projects: {candidate.get('projects', [])}
-        - Achievements: {candidate.get('notable_achievements', [])}
-        - Experience: {candidate.get('experience_years', 'Not specified')}
+        The candidate has:
+        - Worked at: {', '.join(candidate.get('companies_worked', [])) if candidate.get('companies_worked') else 'various companies'}
+        - Skills: {', '.join(candidate.get('key_skills', [])[:5]) if candidate.get('key_skills') else 'multiple technical skills'}
+        - Projects: {', '.join(candidate.get('projects', [])[:3]) if candidate.get('projects') else 'several projects'}
+        - Achievements: {', '.join(candidate.get('notable_achievements', [])[:3]) if candidate.get('notable_achievements') else 'various achievements'}
         
-        JOB REQUIREMENTS:
-        - Position: {job.get('job_title', 'Not specified')}
-        - Company: {job.get('company_name', 'Not specified')}
-        - Required Skills: {job.get('required_skills', [])}
-        - Responsibilities: {job.get('key_responsibilities', [])}
-        - Experience Required: {job.get('experience_required', 'Not specified')}
+        The role requires:
+        - Skills: {', '.join(job.get('required_skills', [])[:5]) if job.get('required_skills') else 'technical expertise'}
+        - Responsibilities: {', '.join(job.get('key_responsibilities', [])[:3]) if job.get('key_responsibilities') else 'key responsibilities'}
         
-        MATCH ANALYSIS:
-        - Matching Skills: {match.get('matching_skills', [])}
-        - Missing Skills: {match.get('missing_skills', [])}
-        - Relevant Experience: {match.get('relevant_experience', [])}
-        - Areas to Probe: {match.get('areas_to_probe', [])}
-
-        CRITICAL INSTRUCTIONS:
-        1. Each question MUST reference SPECIFIC details from either the resume or job listing
-        2. Use the candidate's actual company names, projects, or technologies when asking questions
-        3. Reference specific job requirements or responsibilities when relevant
-        4. For skill gaps, ask how they would transfer existing skills or learn new ones
-        5. Include at least one question about specific achievements or projects mentioned
-        6. Questions should feel personalized, not generic
-
-        Example of a GOOD tailored question:
-        "I see you worked with {candidate.get('key_skills', ['Python'])[0] if candidate.get('key_skills') else 'Python'} at {candidate.get('companies_worked', ['your previous company'])[0] if candidate.get('companies_worked') else 'your previous company'}. This role requires {job.get('required_skills', ['similar technology'])[0] if job.get('required_skills') else 'similar technology'}. Can you describe a specific project where you used these skills to solve a complex problem?"
-
-        Example of a BAD generic question:
-        "Tell me about a time you worked in a team."
-
-        Provide the response as a JSON array:
+        Generate {num_questions} interview questions that:
+        1. MUST mention specific companies, projects, or achievements from the candidate's background
+        2. MUST relate to specific requirements or responsibilities of the job
+        3. MUST be behavioral (start with "Tell me about...", "Describe a time...", "Walk me through...")
+        4. MUST probe deeper into their actual experience, not hypotheticals
+        
+        For each question, pick ONE specific item from their background and connect it to ONE specific job requirement.
+        
+        EXAMPLES OF EXCELLENT TAILORED QUESTIONS:
+        - "At {candidate.get('companies_worked', ['TechCorp'])[0] if candidate.get('companies_worked') else 'your previous company'}, you {candidate.get('notable_achievements', ['led a project'])[0] if candidate.get('notable_achievements') else 'worked on projects'}. Walk me through how you approached this and how it prepares you for {job.get('key_responsibilities', ['similar responsibilities'])[0] if job.get('key_responsibilities') else 'this role'}."
+        - "You mentioned {candidate.get('projects', ['a specific project'])[0] if candidate.get('projects') else 'project experience'}. This role requires {job.get('required_skills', ['specific skills'])[0] if job.get('required_skills') else 'similar expertise'}. Describe how you applied similar skills in that context."
+        - "Looking at your experience with {candidate.get('key_skills', ['Python'])[0] if candidate.get('key_skills') else 'technology'} and our need for {job.get('required_skills', ['similar tech'])[0] if job.get('required_skills') else 'technical skills'}, tell me about the most complex problem you solved using this technology."
+        
+        Return ONLY a JSON array with this exact structure:
         [
             {{
-                "text": "[Specific question referencing actual details from resume/job]",
+                "text": "Your specific question here",
                 "category": "behavioral|technical|situational|cultural",
-                "rationale": "[Explain why this question matters for THIS specific candidate and role]"
+                "rationale": "Why this question matters for this specific candidate and role"
             }}
         ]
         """
         
         try:
             response = self.client.chat.completions.create(
-                model="gpt-4",
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.4
+                model="gpt-4-turbo-preview",  # More capable model
+                messages=[
+                    {"role": "system", "content": "You are an expert interviewer who ALWAYS creates highly specific questions that reference the candidate's actual experience and companies. Never ask generic questions."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.6,  # Higher for more creative questions
+                max_tokens=2000
             )
             
             content = response.choices[0].message.content
@@ -146,6 +139,53 @@ class AIService:
                 
         except Exception as e:
             print(f"Question generation failed: {str(e)}")
+            return []
+    
+    def generate_direct_questions(self, resume_text: str, job_text: str, num_questions: int = 7) -> List[Dict[str, str]]:
+        """Generate questions directly from resume and job text without intermediate analysis."""
+        prompt = f"""
+        Create {num_questions} highly specific interview questions for this candidate.
+        
+        RESUME:
+        {resume_text[:2000]}  # First 2000 chars
+        
+        JOB DESCRIPTION:
+        {job_text[:2000]}  # First 2000 chars
+        
+        REQUIREMENTS:
+        1. Each question MUST quote or reference something SPECIFIC from the resume (a company name, project, achievement, or technology)
+        2. Each question MUST connect to a SPECIFIC requirement from the job description
+        3. Use this format: "I see you [specific thing from resume]. How would you apply that to [specific job requirement]?"
+        4. Start questions with: "Tell me about...", "Walk me through...", "I noticed you...", "Your resume mentions..."
+        
+        Return a JSON array with questions that feel like you actually read their resume:
+        [
+            {{
+                "text": "Question referencing specific details",
+                "category": "behavioral|technical|situational",
+                "rationale": "Why this matters"
+            }}
+        ]
+        """
+        
+        try:
+            response = self.client.chat.completions.create(
+                model="gpt-4-turbo-preview",
+                messages=[
+                    {"role": "system", "content": "You are reviewing a specific resume and job description. Create questions that prove you've read both documents carefully. Reference specific companies, projects, and achievements by name."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.7,
+                max_tokens=2000
+            )
+            
+            content = response.choices[0].message.content
+            json_match = re.search(r'\[.*\]', content, re.DOTALL)
+            if json_match:
+                return json.loads(json_match.group())
+            return []
+        except Exception as e:
+            print(f"Direct question generation failed: {str(e)}")
             return []
     
     def analyze_response(self, question: str, response_text: str, job_context: str = "") -> Dict[str, Any]:
@@ -196,7 +236,7 @@ class AIService:
         
         try:
             response = self.client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4-turbo-preview",  # More capable model
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.3
             )
@@ -237,7 +277,7 @@ class AIService:
         
         try:
             response = self.client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4-turbo-preview",  # More capable model
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.4
             )
@@ -282,7 +322,7 @@ class AIService:
         
         try:
             response = self.client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4-turbo-preview",  # More capable model
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.3
             )
@@ -326,7 +366,7 @@ class AIService:
         
         try:
             response = self.client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4-turbo-preview",  # More capable model
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.1
             )
